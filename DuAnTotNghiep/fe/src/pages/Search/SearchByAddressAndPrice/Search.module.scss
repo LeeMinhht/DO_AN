@@ -1,0 +1,100 @@
+.wrapper-search{
+    position: relative;
+    max-width: 1280px;
+    margin: 4rem auto;
+}
+.finding-section{
+    position: fixed;
+    width: 1280px;
+    transition: top .3s ease 0s;
+    top: 65px;
+    z-index: 1000!important;
+    background: #fff;
+}
+.m-container{
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.finding-container{
+    display: flex;
+    justify-content: center;
+    grid-gap: 36px;
+    gap: 36px;
+    padding: 24px 0;
+    position: relative;
+}
+.finding-info{
+    display: flex;
+    grid-gap: 32px;
+    gap: 32px;
+}
+.input-form{
+    display: flex;
+    align-items: center;
+    grid-gap: 8px;
+    gap: 8px;
+}
+.wrap-svg{
+    // line-height: 0;
+    user-select: none;
+}
+.wrap-svg-location{
+    color: rgb(110, 107, 107);
+}
+.address{
+    position: relative;
+    width: 100%;
+}
+.address input{
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 230px;
+    white-space: nowrap;
+    outline: 0 none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    background-color: initial;
+    border: none;
+    box-shadow: none;
+}
+.price-form{
+    position: relative;
+    display: flex;
+    grid-gap: 32px;
+    gap: 32px;
+}
+.price-form-item{
+    display: flex;
+    align-items: center;
+    grid-gap: 8px;
+    gap: 8px;
+}
+.price-value{
+    cursor: pointer;
+}
+.price-value input{
+    width: 7rem;
+}
+.list-car-section{
+    overflow-y: auto;
+    min-height: 100vh;
+    background: #f6f6f6;
+    padding-top: 260px;
+    transition: all .5s ease 0s;
+}
+.scroll-fix{
+
+}
+.col4-mg20-list-car{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 20px;
+    gap: 20px;
+}

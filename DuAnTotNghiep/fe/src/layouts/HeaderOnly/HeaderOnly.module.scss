@@ -1,0 +1,28 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    // height: auto;
+    // align-items: center;
+    display: flex;
+}
+.container {
+    background: #f6f6f6;
+    width: var(--default-layout-width);
+    max-width: 100%;
+    // padding: 0 var(--default-layout-horizontal-spacer);
+    margin-top: var(--default-layout-header-height);
+    display: flex;
+    flex: 1;
+ 
+}
+.content {
+    flex: 1;
+    float: left;
+}
+Footer{
+    background-color: #343a40;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}

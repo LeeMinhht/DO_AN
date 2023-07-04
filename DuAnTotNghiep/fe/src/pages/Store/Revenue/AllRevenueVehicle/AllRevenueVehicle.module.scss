@@ -1,0 +1,50 @@
+
+.wrapper-RevenueVehicle{
+    width: 100%;
+    padding-right: 2rem;
+}
+
+.filter-status{
+    float: right;
+    // margin-top: -10rem;
+    padding: 0 0 5rem 0;
+    display: flex;
+    align-items: center;
+    grid-gap: 8px;
+    gap: 8px;
+}
+.custom-select{
+    position: relative;
+}
+.custom-select::before{
+    content: url(../../../../assets/images/customer-select.svg);
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+}
+.custom-select select {
+    cursor: pointer;
+    padding: 12px 36px 12px 12px;
+    width: 100%;
+    font-size: 1,7rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-weight: 600;
+    color: #000;
+    appearance: none;
+}
+
+.custom-select select option{
+    line-height: 2rem;
+    cursor: pointer;
+    font-weight: normal;
+    display: block;
+    white-space-collapse: collapse;
+    text-wrap: nowrap;
+    min-height: 1.2em;
+    font-size: 1.8rem;
+}

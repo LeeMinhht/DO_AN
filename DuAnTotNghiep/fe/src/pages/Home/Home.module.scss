@@ -1,0 +1,237 @@
+
+.wrapper{
+    position: relative;
+    max-width: 1280px;
+    margin: 4rem auto;
+}
+.background-banned{
+    background-image: url('../../assets/images/background-baner-home.png');
+    position: relative;
+    height: 720px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    border-radius: 16px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.home-title{
+    position: absolute;
+    right: 0;
+    left: 0;
+    font-size: 4rem;
+    font-weight: 700;
+    bottom: 130px;
+    color: #fff;
+    max-width: 600px;
+    text-align: center;
+    margin: auto;
+}
+.search-option{
+    position: relative;
+    bottom: 115px;
+    z-index: 3;
+}
+.option{
+    display: flex;
+    justify-content: center;
+}
+.option-item-1{
+    background-color: #5fcf86;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    grid-gap: 8px;
+    gap: 8px;
+    width: 153px;
+    border-radius: 16px 0 0 0;
+    cursor: pointer;
+}
+.item-1-svg{
+    user-select: none;
+    line-height: 0;
+}
+.item-1-icon{
+    color: #fff;
+}
+.item-1-name{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+.option-item-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    grid-gap: 8px;
+    gap: 8px;
+    width: 153px;
+    background-color: #fff;
+    border-radius: 16px 0 0 0;
+    cursor: pointer;
+    border-radius: 0 16px 0 0;
+
+}
+
+.item-2-name{
+    color: #2c2a2a;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+.home-search{
+    display: flex;
+    flex-direction: column;
+    margin: 0 80px;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0 -3px 12px rgba(0,0,0,.1), 0 9px 12px rgba(75,75,75,.1);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+.search-form{
+    padding-bottom: 16px;
+    padding-top: 16px;
+    display: flex;
+    padding: 8px 5px;
+    width: 100%;
+}
+.search-form-item-address{
+    display: flex;
+    flex-direction: column;
+    // width: 100%;
+}
+.search-form-item-address-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.address-svg{
+    margin-right: 16px;
+    line-height: 0;
+    user-select: none;
+}
+.address-inf{
+    color: #767676;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+.search-form-item-choose{
+    display: flex;
+    margin-left: 2rem;
+    grid-gap: 16px;
+    gap: 16px;
+}
+.choose-item{
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+
+}
+.choose-item-option{
+    width: 100%;
+    position: relative;
+}
+.choose-item-value{
+    padding-right: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    display: inline-block;
+    background-color: initial;
+    border: none;
+    box-shadow: none;
+}
+.btn-search{
+    width: 100%;
+    height: 90%;
+    margin: auto;
+}
+.line-line-address{
+    border-right: 1px solid #c6c6c6;
+    margin: 4px 12px;
+}
+.search-form-price{
+    display: flex;
+}
+.search-form-item{
+    display: flex;
+    margin-left: 2rem;
+    grid-gap: 16px;
+    gap: 16px;
+}
+.search-form-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.item-svg-2{
+    margin-right: 16px;
+    line-height: 0;
+    user-select: none;
+}
+.item-icon-2{
+    line-height: 0;
+}
+.price-start{
+    color: #767676;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+.choose-2{
+    display: flex;
+    margin-left: 40px;
+    grid-gap: 16px;
+    gap: 16px;
+
+}
+
+//top 8 xe được thuê nhiều nhất
+.top8-vehicle{
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background: #f6f6f6;
+}
+.top8-vehicle-header{
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.vehicle-header-title{
+    margin-bottom: 5rem;
+    text-align: center;
+    // margin: 0;
+}
+.vehicle-container{
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.vehicle-container-col20{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 20px;
+    gap: 20px;
+}
+.topLocation{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.advantage{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}

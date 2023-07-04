@@ -1,0 +1,79 @@
+.wrapper {
+    --search-boder-radius: 92px;
+    --search-height: 46px;
+    --search-top-spacer: 9px;
+    --search-button-width: 52px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height:var(--default-layout-header-height);
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    // padding:  0 5rem 0 5rem;
+}
+.inner {
+    // height: 90%;
+    width: 1280px;
+    // padding: 5px 2.5rem 5px 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-link {
+    display: flex;
+}
+.logo-img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 8px;
+    // object-fit: cover;
+}
+.title-logo {
+    padding: 0  0 0 1.5rem;
+    margin: auto;
+    font-weight: bold;
+
+}
+
+
+//Action
+.action {
+    display: flex;
+    align-items: center;
+}
+.customer-store{
+    font-size: 1.6rem;
+    font-size: 500;
+}
+
+.more-btn {
+    font-size: 2rem;
+    margin-left: 28px;
+    padding: 4px 8px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.action-btn {
+    font-size: 2.2rem;
+    color: #161823;
+    background-color: transparent;
+    padding: 4px 12px;
+    cursor: pointer;  
+
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
