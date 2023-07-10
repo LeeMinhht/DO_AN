@@ -60,13 +60,14 @@ function Menu({children, items = [],hideOnClick = false,onChange = defaultFn}) {
 
     return ( 
         <Tippy
+          trigger="click"
           interactive
           placement="bottom-end"
-          delay={[0, 700]}
-          hideOnClick = {hideOnClick}
+          delay={[0, 500]}
+          // hideOnClick = {hideOnClick}
           offset={[12, 8]}
           render={renderResult}
-          onHide={handleResetToFirstPage}
+          // onHide={handleResetToFirstPage}
         >
 
           {children}

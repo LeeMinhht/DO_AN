@@ -10,14 +10,14 @@ import {
   faSignOut,
   faUser,
   faBellSlash,
-  faBell,
   faBellConcierge,
   faRectangleTimes,
   faRectangleList
 } from "@fortawesome/free-solid-svg-icons";
-import Tippy from "@tippyjs/react";
+// import Tippy from "@tippyjs/react";
+import Tippy from "@tippyjs/react/headless";
 import { Link } from "react-router-dom";
-import "tippy.js/dist/tippy.css"; // optional
+// import "tippy.js/dist/tippy.css"; // optional
 
 import styles from "./Header.module.scss";
 import images from "~/assets/images";
@@ -25,12 +25,10 @@ import images from "~/assets/images";
 import config from "~/config";
 import Button from "~/Component/Button";
 import Menu from "~/Component/Poper/Menu";
-import { BellIcon, MessageIcon, UploadIcon,changeBackgroundimage } from "~/Component/Icons";
 import Image from "~/Component/Images";
 import Search from "../Search";
-import { FaBell } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import axiosClient from "~/scrips/healper/axiosClient";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
+import Notification from "~/Component/Notification/Notification";
 
 const cx = classNames.bind(styles);
 
@@ -63,39 +61,12 @@ const MENU_ITEMS = [
   },
 ];
 
-function Header({searchHiden}) {
+function Header({ searchHiden }) {
   const currentUser = true;
- 
-  const [customer,setCustomer] = useState({})
-  const [store,setStore] = useState([])
 
   const cusUsername = 'leminh'
+  console.log(cusUsername)
 
-  useEffect(() => {
-    axiosClient.get(`http://localhost:8080/customers/findById/${cusUsername}`)
-      .then((response) => {
-        const data = response;
-        setCustomer(data);
-        console.log(data)
-      })
-      .catch(() => {
-        console.log('không tìm thấy user')
-      });
-  }, [cusUsername]);
-
-  //tìm kiếm store theo username
-  useEffect(() => {
-    axiosClient.get(`http://localhost:8080/store/findByCustomer/${cusUsername}`)
-      .then((response) => {
-        const data = response;
-        setStore(data);
-      })
-      .catch(() => {
-        console.log('không tìm thấy store')
-      });
-  }, []);
-
-  //handle logic
   const handleMenuChange = (menuItem) => {
     console.log(menuItem);
   };
@@ -124,61 +95,72 @@ function Header({searchHiden}) {
       separate: true,
     },
   ];
-  const username = 'leminh';
 
   return (
     (
       <header className={cx("wrapper")}>
-      <div className={cx("inner")}>
-        <Link to={config.routes.home} className={cx("logo-link")}>
-          <img src={images.logo1} alt="MIKKAA" className={cx('logo-img')}></img>
-          <h3 className={cx('title-logo')}>Take you everywhere</h3>
-        </Link>
-        
+        <div className={cx("inner")}>
+          <Link to={config.routes.home} className={cx("logo-link")}>
+            <img src={images.logo1} alt="MIKKAA" className={cx('logo-img')}></img>
+            <h3 className={cx('title-logo')}>Take you everywhere</h3>
+          </Link>
 
-        {searchHiden?(null):(<Search />)}
 
-        <div className={cx("action")}>
-          {currentUser ? (
-            <>
-            {store.length()===0?(<Button className={cx('customer-store')}>Đăng kí cửa hàng</Button>):
-            (<Button className={cx('customer-store')}>Cửa hàng của bạn</Button>)}
-              <Tippy delay={[0, 200]} content="Message" placement="bottom">
-                <button className={cx("action-btn")}>
-                  {/* <UploadIcon /> */}
-                  <BellIcon></BellIcon>
+          {searchHiden ? (null) : (<Search />)}
 
-                </button>
-              </Tippy>
-            </>
-          ) : (
-            <>
-              <Button text>Upload</Button>
-              <Button primary >Log in</Button>
-            </>
-          )}
-
-          <Menu
-            items={currentUser ? userMenu : MENU_ITEMS}
-            onChange={handleMenuChange}
-          >
+          <div className={cx("action")}>
             {currentUser ? (
-              <Image
-                src="https://files.fullstack.edu.vn/f8-prod/user_photos/199187/627002074c706.jpg"
-                className={cx("user-avatar")}
-                alt="Le Van Minh"
-              ></Image>
+              <>
+                <Button className={cx('customer-store')}>Cửa hàng của bạn</Button>
+
+                <Tippy
+                  trigger="click"
+                  interactive
+                  placement="bottom-end"
+                  delay={[0, 500]}
+                  offset={[12, 8]}
+                  render={() => {
+                    return (
+                      <div>
+                        <Notification/>
+                      </div>
+                    );
+                  }}
+                  // onHide={handleResetToFirstPage}
+                >
+                  <button className={cx("action-btn")}>
+                      <FontAwesomeIcon icon={faBell} />
+                  </button>
+                </Tippy>
+              </>
             ) : (
-              <button className={cx("more-btn")}>
-                <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
-              </button>
+              <>
+                <Button text>Upload</Button>
+                <Button primary >Log in</Button>
+              </>
             )}
-          </Menu>
+
+            <Menu
+              items={currentUser ? userMenu : MENU_ITEMS}
+              onChange={handleMenuChange}
+            >
+              {currentUser ? (
+                <Image
+                  src="https://files.fullstack.edu.vn/f8-prod/user_photos/199187/627002074c706.jpg"
+                  className={cx("user-avatar")}
+                  alt="Le Van Minh"
+                ></Image>
+              ) : (
+                <button className={cx("more-btn")}>
+                  <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
+                </button>
+              )}
+            </Menu>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
     )
-    
+
   );
 }
 

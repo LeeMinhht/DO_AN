@@ -41,5 +41,8 @@ public class HireVehicle implements Serializable {
     @OneToMany(mappedBy = "hireVehicle")
     List<Comment> comments;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "hireVehicle")
+    List<Notification> notifications;
 
  }

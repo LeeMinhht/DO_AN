@@ -20,7 +20,7 @@ function Profile() {
   const [vehicles, setVehicles] = useState([])
   const [addressName, setAddressName] = useState(null)
 
-  const username = 'Leminh';
+  const username = 'tranTai';
   console.log(username);
   useEffect(() => {
     axiosClient.get(`http://localhost:8080/customers/findById/${username}`)
@@ -41,6 +41,8 @@ function Profile() {
     axiosClient.get(`http://localhost:8080/store/findByCustomer/${username}`)
       .then((response) => {
         const data = response;
+        console.log(data);
+
         setStore(data);
       })
       .catch(() => {

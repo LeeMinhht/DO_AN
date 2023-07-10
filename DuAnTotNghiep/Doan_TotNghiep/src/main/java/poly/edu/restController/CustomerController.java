@@ -18,7 +18,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/getAll")
-    public List<Customer> getAllCustomer(@RequestBody Customer customer){
+    public List<Customer> getAllCustomer(){
         return customerService.getAll();
     }
 

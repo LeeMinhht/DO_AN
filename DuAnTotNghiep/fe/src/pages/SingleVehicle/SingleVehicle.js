@@ -1,6 +1,6 @@
 import classNames from "classnames/bind"
 import styles from './SingleVehicle.module.scss'
-import { Link, useParams } from 'react-router-dom';
+import { Await, Link, useParams } from 'react-router-dom';
 
 import { useState, useEffect } from "react";
 import axiosClient from "~/scrips/healper/axiosClient";
@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faChartSimple, faCircleInfo, faLocationDot, faPhone, faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "~/Component/Button";
 import Comment from "./Comment/Comment";
+import Notification from "~/Component/Notification/Notification";
+import axios from "axios";
 
 const cx = classNames.bind(styles)
 
@@ -21,6 +23,8 @@ function SingleVehicle() {
     const [store, setStore] = useState({})
     const [customer, setCustomer] = useState({})
     const [addressName, setAddressName] = useState(null)
+    const [hireData, setHireData] = useState({})
+
 
     useEffect(() => {
         axiosClient.get(`http://localhost:8080/vehicle/findById/${vehicleId}`)
@@ -95,7 +99,7 @@ function SingleVehicle() {
     }
 
     //lưu dữ liệu vào bảng thuê xe
-    const submitHireVehicle = () => {
+    const submitHireVehicle = async () => {
 
         if (isNaN(diffDays)) {
             alert("Vui lòng chọn ngày trả")
@@ -122,27 +126,35 @@ function SingleVehicle() {
 
         }
 
+        try {
+            const response1 = await axios.post(`http://localhost:8080/hireVehicle/add`, hireVehicleData);
+            const hireData = response1.data;
+            setHireData(hireData);
+            alert('Bạn đã thuê thành công');
 
-        axiosClient.post(`http://localhost:8080/hireVehicle/add`, hireVehicleData)
-            .then((response) => {
-                const data = response;
-                alert('Bạn đã thuê thành công')
-            })
-            .catch((error) => {
-                console.log('error save data')
-                console.log(error)
-            });
-
-            //set trạng thái xe thành đã thuê
+            //set trạng thái xe đã thuê
             vehicle.statusHiring = false;
-            axiosClient.put(`http://localhost:8080/vehicle/update/${vehicleId}`, vehicle)
-            .then((response) => {
-                const data = response;
-            })
-            .catch((error) => {
-                console.log('update trạng thái xe thất bại')
-                console.log(error)
-            });
+            await axios.put(`http://localhost:8080/vehicle/update/${vehicleId}`, vehicle);
+
+            //thêm thông báo
+            const notificationData = {
+                content: 'thue thanh cong',
+                createDate: new Date(date.split('/').reverse().join('-')),
+                isRead: false,
+                customer: customer,
+                hireVehicle: hireData,
+                transaction: null
+            };
+
+            console.log(notificationData);
+
+            await axios.post(`http://localhost:8080/notifications/add`, notificationData);
+
+        } catch (error) {
+            console.log('Error: ', error.message);
+            console.log('Error details: ', error.response.data);
+        }
+
 
         //   trừ tiền của ngưỜi đặt
         customer.cart = customer.cart - (vehicle.rentByDay + vehicle.rentByDay * 0.1) * diffDays
@@ -165,6 +177,7 @@ function SingleVehicle() {
                 console.log('cộng tiền không thành công')
                 console.log(error)
             });
+
     }
 
     return (
@@ -278,9 +291,10 @@ function SingleVehicle() {
                                                 {((vehicle.rentByDay + vehicle.rentByDay * 0.1) * diffDays).toLocaleString('vi-VN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} đ</p>)}
                                     </div>
                                 </div>
-                                {vehicle.statusHiring===true?(
+                                {vehicle.statusHiring === true ? (
                                     <Button onClick={submitHireVehicle} primary large green className={cx('hire-btn')}>Đặt xe</Button>
-                                ):(<Button onClick={submitHireVehicle} disable primary large  className={cx('hire-btn')}>Xe hiện đang bận</Button>)}
+                                ) : (<Button onClick={submitHireVehicle} disable primary large className={cx('hire-btn')}>Xe hiện đang bận</Button>)}
+
                             </div>
                         </div>
                         <div className={cx('content-detail')}>

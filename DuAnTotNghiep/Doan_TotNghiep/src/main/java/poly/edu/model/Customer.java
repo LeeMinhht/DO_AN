@@ -51,6 +51,14 @@ public class Customer implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "customer")
     List<Report> reports;
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer")
+    List<Transaction> transactions;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer")
+    List<Notification> notifications;
+
 
 
 }
