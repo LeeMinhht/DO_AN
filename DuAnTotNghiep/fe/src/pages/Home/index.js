@@ -1,10 +1,10 @@
-
+import queryString from 'query-string';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 import Footer from '~/layouts/components/Footer/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faLocationDot, faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axiosClient from '~/scrips/healper/axiosClient';
 import Button from '~/Component/Button';
@@ -23,6 +23,13 @@ function Home() {
     const [vehicles, setVehicles] = useState([])
 
     const [addresss, setAddresss] = useState([])
+
+    //gửi request để check trạng thái nạp tiền
+
+    const values = queryString.parse(window.location.search);
+    const orderId = values.orderId;
+    console.log(orderId);
+
 
 
     //tìm kiếm all Address
@@ -72,16 +79,16 @@ function Home() {
     }
 
     useEffect(() => {
-    axiosClient.get(`http://localhost:8080/vehicle/findTop8`)
-      .then((response) => {
-        const data = response;
-        setVehicles(data);
-        console.log(data)
-      })
-      .catch(() => {
-        console.log('không tìm thấy vehicle')
-      });
-  }, []);
+        axiosClient.get(`http://localhost:8080/vehicle/findTop8`)
+            .then((response) => {
+                const data = response;
+                setVehicles(data);
+                console.log(data)
+            })
+            .catch(() => {
+                console.log('không tìm thấy vehicle')
+            });
+    }, []);
 
     return (
 
@@ -193,7 +200,7 @@ function Home() {
                             </div>
 
                         </div>
-                        <Link  to={`/search/${addressId}/${minPrice}/${maxPrice}`}>
+                        <Link to={`/search/${addressId}/${minPrice}/${maxPrice}`}>
                             <Button className={cx('btn-search')} onClick={submitFindVehicle} primary green>Tìm Xe</Button>
                         </Link>
                     </div>
@@ -209,6 +216,12 @@ function Home() {
                 <div className={cx('vehicle-container')}>
                     <ListVehicle vehicles={vehicles}></ListVehicle>
                 </div>
+                <div className={cx('all-vehicle')}>
+                    <Link to={`/allVehicle`}>
+                        <h4 className={cx('all-vehicle-title')}>Xem tất cả</h4>
+                    </Link>
+                </div>
+
             </div>
 
             {/* Địa điểm nổi bật */}
@@ -218,8 +231,8 @@ function Home() {
 
             {/* Ưu điểm */}
             <div className={cx('advantage')}>
-                <Advantage/>
-            </div>                               
+                <Advantage />
+            </div>
 
         </div >
 

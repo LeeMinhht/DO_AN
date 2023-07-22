@@ -27,6 +27,10 @@ public class Transaction implements Serializable {
 
     private Boolean status;
 
+    private String orderId;
+
+    private String requestId;
+
     @ManyToOne
     @JoinColumn(name = "cusUsername")
     Customer customer;

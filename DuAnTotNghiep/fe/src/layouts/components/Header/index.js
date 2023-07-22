@@ -2,16 +2,12 @@ import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleQuestion,
-  faCoins,
   faEarthAsia,
   faEllipsisVertical,
   faGear,
   faKeyboard,
   faSignOut,
   faUser,
-  faBellSlash,
-  faBellConcierge,
-  faRectangleTimes,
   faRectangleList
 } from "@fortawesome/free-solid-svg-icons";
 // import Tippy from "@tippyjs/react";
@@ -100,7 +96,7 @@ function Header({ searchHiden }) {
     (
       <header className={cx("wrapper")}>
         <div className={cx("inner")}>
-          <Link to={config.routes.home} className={cx("logo-link")}>
+          <Link to={config.routes.home} className={cx("logo-link")} onClick={() =>{window.scrollTo(0,0)}}>
             <img src={images.logo1} alt="MIKKAA" className={cx('logo-img')}></img>
             <h3 className={cx('title-logo')}>Take you everywhere</h3>
           </Link>

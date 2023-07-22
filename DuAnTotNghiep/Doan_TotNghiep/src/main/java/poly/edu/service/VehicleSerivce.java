@@ -16,6 +16,16 @@ import java.util.function.Function;
 public interface  VehicleSerivce {
 
 
+    @Query("select new poly.edu.dto.VehicleDto(v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring," +
+            "v.description,v.address,v.store,v.brand,count(h.vehicle.vehicleId))   " +
+            "from Vehicle v inner join HireVehicle h on v.vehicleId=h.vehicle.vehicleId where v.vehicleType = ?1 and v.brand.brandId = ?2 group by v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring, v.description,v.address,v.store,v.brand")
+    List<VehicleDto> findByVehicleType(Boolean type, Integer bandId);
+
+    @Query("select new poly.edu.dto.VehicleDto(v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring," +
+            "v.description,v.address,v.store,v.brand,count(h.vehicle.vehicleId))   " +
+            "from Vehicle v inner join HireVehicle h on v.vehicleId=h.vehicle.vehicleId group by v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring, v.description,v.address,v.store,v.brand")
+    List<VehicleDto> findAllVehicleDto();
+
     List<Vehicle> findAllByVehicleNameContaining(String vehicleName);
 
     @Query("select new poly.edu.dto.VehicleDto(v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring," +

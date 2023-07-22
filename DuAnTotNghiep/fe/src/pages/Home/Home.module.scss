@@ -215,6 +215,19 @@
     text-align: center;
     // margin: 0;
 }
+.all-vehicle{
+    // margin-bottom: 5rem;
+
+    text-align: center;
+}
+.all-vehicle-title{
+    padding-top: 4rem;
+    font-size: 1.8rem;
+}
+.all-vehicle-title:hover{
+    color: #5fcf86;
+    cursor: pointer;
+}
 .vehicle-container{
     position: relative;
     max-width: 1280px;

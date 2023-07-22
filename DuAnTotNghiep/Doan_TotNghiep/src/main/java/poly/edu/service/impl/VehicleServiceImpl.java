@@ -24,6 +24,22 @@ public class VehicleServiceImpl implements VehicleSerivce {
     private VehicleResp vehicleResp;
 
     @Override
+    @Query("select new poly.edu.dto.VehicleDto(v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring," +
+            "v.description,v.address,v.store,v.brand,count(h.vehicle.vehicleId))   " +
+            "from Vehicle v inner join HireVehicle h on v.vehicleId=h.vehicle.vehicleId where v.vehicleType = ?1 and v.brand.brandId = ?2 group by v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring, v.description,v.address,v.store,v.brand")
+    public List<VehicleDto> findByVehicleType(Boolean type, Integer bandId) {
+        return vehicleResp.findByVehicleType(type, bandId);
+    }
+
+    @Override
+    @Query("select new poly.edu.dto.VehicleDto(v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring," +
+            "v.description,v.address,v.store,v.brand,count(h.vehicle.vehicleId))   " +
+            "from Vehicle v inner join HireVehicle h on v.vehicleId=h.vehicle.vehicleId group by v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring, v.description,v.address,v.store,v.brand")
+    public List<VehicleDto> findAllVehicleDto() {
+        return vehicleResp.findAllVehicleDto();
+    }
+
+    @Override
     public List<Vehicle> findAllByVehicleNameContaining(String vehicleName) {
         return vehicleResp.findAllByVehicleNameContaining(vehicleName);
     }

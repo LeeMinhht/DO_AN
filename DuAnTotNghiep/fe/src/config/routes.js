@@ -13,6 +13,8 @@ const routes = {
     history: '/history/:cusUsername',
     revenue: '/revenue/:storeId',
     live: '/live',
+    allVehicle: '/allVehicle',
+    payment: '/payment',
 
 }
 
