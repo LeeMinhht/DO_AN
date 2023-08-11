@@ -1,7 +1,10 @@
 package poly.edu.restController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import poly.edu.dto.VehicleDto;
+import poly.edu.model.Customer;
 import poly.edu.model.Vehicle;
 import poly.edu.responsitory.VehicleResp;
 import poly.edu.service.BrandService;
@@ -89,6 +92,11 @@ public class VehicleController {
         return vehicleSerivce.findByAddressAndPrice(addressId,minPrice,maxPrice);
     }
 
-
+    @GetMapping("/countVehicle")
+    public ResponseEntity<?> countVehicle() {
+        List<Vehicle> vehicles = vehicleSerivce.findAll();
+        int count  = vehicleSerivce.findAll().size();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
 
 }

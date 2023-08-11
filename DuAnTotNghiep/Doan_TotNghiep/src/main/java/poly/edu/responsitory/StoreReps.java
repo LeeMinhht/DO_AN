@@ -25,4 +25,5 @@ public interface StoreReps extends JpaRepository<Store,Integer> {
     Store findStoreByVehicleId(Integer vehicleId);
 
 
+
 }

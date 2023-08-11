@@ -1,11 +1,14 @@
 package poly.edu.restController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import poly.edu.dto.HireDto;
 import poly.edu.dto.RevenueDto;
 import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.HireVehicle;
+import poly.edu.model.Vehicle;
 import poly.edu.service.HireVehicleService;
 
 import java.util.List;
@@ -52,6 +55,13 @@ public class HireRestController {
     @GetMapping("/findHistoryByCusUsername/{cusUsername},{status}")
     public List<HireDto> findHistoryByCusUsername(@PathVariable("cusUsername") String username, @PathVariable("status") Boolean status){
         return hireVehicleService.findHistoryHireByCusUsername(username,status);
+    }
+
+    @GetMapping("/countHire")
+    public ResponseEntity<?> countHire() {
+        List<HireVehicle> hireVehicles = hireVehicleService.findAll();
+        int count  = hireVehicleService.findAll().size();
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
 }

@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public interface StoreService {
+
     List<Store> findByNameStoreContaining(String key);
 
     List<Store> getAll();

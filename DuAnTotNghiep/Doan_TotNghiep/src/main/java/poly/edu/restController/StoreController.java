@@ -3,7 +3,6 @@ package poly.edu.restController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import poly.edu.dto.StoreDto;
 import poly.edu.model.Customer;
@@ -72,5 +71,12 @@ public class StoreController {
     @GetMapping("/findStoreByVehicleId/{vehicleId}")
     public Store findStoreByVehicleId(@PathVariable("vehicleId") Integer vehicleId) {
         return storeService.findStoreByVehicleId(vehicleId);
+    }
+
+    @GetMapping("/countStore")
+    public ResponseEntity<?> countStore() {
+        List<Store> stores = storeService.getAll();
+        int count  = storeService.getAll().size();
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 }

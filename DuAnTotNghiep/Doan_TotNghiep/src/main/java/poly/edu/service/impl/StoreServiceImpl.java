@@ -19,8 +19,11 @@ import java.util.function.Function;
 
 @Service
 public class StoreServiceImpl implements StoreService {
+
     @Autowired
     private StoreReps storeReps;
+
+
 
     @Override
     public List<Store> findByNameStoreContaining(String key) {
