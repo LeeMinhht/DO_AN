@@ -18,13 +18,15 @@ import StoreInfomation from '~/pages/Store/StoreInformation/StoreInfomation'
 import Search from '~/pages/Search/SearchByAddressAndPrice'
 import History from '~/pages/History/History'
 import Revenue from '~/pages/Store/Revenue/Revenue'
+import AllVehicle from '~/pages/AllVehicle/Allvehicle'
+import Payment from '~/layouts/components/Payment/Payment'
 
 
 
 //Public router
 const publicRouter = [
     {path: config.routes.home, component: Home},
-    {path: config.routes.profile, component: Profile},
+    {path: config.routes.profile, component: Profile,layout:HeaderOnly},
     {path: config.routes.singleVehicle , component: SingleVehicle},
     {path: config.routes.hireVehiclePage , component: HireVehicle},
     {path: config.routes.changeToStore , component: ChangeToStore},
@@ -34,7 +36,9 @@ const publicRouter = [
     {path: config.routes.addVehicle, component: AddVehicle, layout:HeaderOnly},
     {path: config.routes.search, component: Search, layout:HeaderOnly},
     {path: config.routes.history, component: History, layout:HeaderOnly},
-    {path: config.routes.revenue, component: Revenue, layout:HeaderOnly}
+    {path: config.routes.revenue, component: Revenue, layout:HeaderOnly},
+    {path: config.routes.allVehicle, component: AllVehicle, layout:HeaderOnly},
+    {path: config.routes.payment, component: Payment, layout:HeaderOnly},
 ]
 const privateRouter = [] 
 

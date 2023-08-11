@@ -9,7 +9,7 @@ import axios from "axios";
 
 
 const cx = classNames.bind(styles)
-const username = 'Leminh';
+const username = 'leminh';
 
 
 function Notification(props) {

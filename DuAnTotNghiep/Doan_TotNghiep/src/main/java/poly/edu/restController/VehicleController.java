@@ -25,10 +25,21 @@ public class VehicleController {
     @Autowired
     private BrandService brandService;
 
+    @GetMapping("/findAll")
+    public List<VehicleDto> findAll(){
+        return vehicleSerivce.findAllVehicleDto();
+    }
+
+    @GetMapping("/findByVehicleType/{vehicleType},{brandId}")
+    public List<VehicleDto> findAll(@PathVariable("vehicleType")Boolean vehicleType,@PathVariable("brandId")Integer brandId){
+        return vehicleSerivce.findByVehicleType(vehicleType,brandId);
+    }
+
     @GetMapping("/searchByVehicleName/{vehicleName}")
     public List<Vehicle>searchByVehicleName(@PathVariable("vehicleName") String vehicleName){
         return vehicleSerivce.findByVehicleNameContaining(vehicleName);
     }
+
 
 
     @GetMapping("/search/{addressId}")

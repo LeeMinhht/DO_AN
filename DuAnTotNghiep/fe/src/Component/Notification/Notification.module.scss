@@ -1,6 +1,7 @@
 .wrapper-notification{
     display: flex;
     flex-direction: column;
+    z-index: 999;
     // width: 100%;
     max-width: 45rem;
     white-space: normal;

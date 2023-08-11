@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUsers } from "@fortawesome/free-solid-svg-icons";
 import ProductItem from "~/Component/ProductItem/ProductItem";
+import axios from "axios";
 
 const cx = classNames.bind(styles)
 
@@ -20,7 +21,7 @@ function Profile() {
   const [vehicles, setVehicles] = useState([])
   const [addressName, setAddressName] = useState(null)
 
-  const username = 'tranTai';
+  const username = 'leminh';
   console.log(username);
   useEffect(() => {
     axiosClient.get(`http://localhost:8080/customers/findById/${username}`)
@@ -73,6 +74,7 @@ function Profile() {
         console.log('không tìm thấy Vehicle')
       });
   }, [username]);
+
 
 
 
@@ -138,14 +140,14 @@ function Profile() {
                   </div>
                   <div className={cx('info-box-item')}>
                     <p>Tài khoản</p>
-                    <p className={cx('main')}>{customer.cart}đ</p>
+                    <p className={cx('main')}>{customer.cart?(customer.cart.toLocaleString('vi-VN', { minimumFractionDigits: 0 })):(null)}đ</p>
                   </div>
 
                 </div>
                 <div className={cx('btn-group')}>
                   <Button primary green small>Chỉnh sửa</Button>
                   <Button primary green small>Đổi mật khẩu</Button>
-                  <Button primary green small>Nạp tiền</Button>
+                  <Button primary green small to={`/payment`}>Nạp tiền</Button>
                   {store.length === 0 ? (<Button to={`/changeToStore/${customer.cusUsername}`} primary green small>chuyển đổi cửa hàng</Button>)
                     : (<Button to={`/store/${customer.cusUsername}`} primary green small onClick={() =>{
                       

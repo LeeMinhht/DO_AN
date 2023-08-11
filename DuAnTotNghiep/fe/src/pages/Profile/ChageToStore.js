@@ -10,7 +10,9 @@ const cx = classNames.bind(styles)
 function ChangeToStore() {
 
   const [identityCard, setidentityCard] = useState('')
-  const [address, setAddress] = useState('')
+  const [addressList, setAddressList] = useState([])
+  const [address, setAddress] = useState({})
+  const [addressId, setAddressId] = useState(1)
   const [phone, setPhone] = useState('')
   const [nameStore, setNameStore] = useState('')
   const [image, setImage] = useState('')
@@ -33,6 +35,30 @@ function ChangeToStore() {
       });
   }, []);
 
+  //tìm kiếm all Address 
+  useEffect(() => {
+    axiosClient.get(`http://localhost:8080/address/findAll`)
+      .then((response) => {
+        const data = response;
+        setAddressList(data);
+      })
+      .catch(() => {
+        console.log('không tìm thấy address')
+      });
+  }, []);
+
+    //tìm kiếm  Address theo addressId
+    useEffect(() => {
+      axiosClient.get(`http://localhost:8080/address/findById/${addressId}`)
+        .then((response) => {
+          const data = response;
+          setAddress(data);
+        })
+        .catch(() => {
+          console.log('không tìm thấy address')
+        });
+    }, [addressId]);
+
   const handleChangeIdentityCard = (e) => {
     const searchValue = e.target.value;
 
@@ -53,7 +79,7 @@ function ChangeToStore() {
     const searchValue = e.target.value;
 
     if (!searchValue.startsWith(' ')) {
-      setAddress(searchValue)
+      setAddressId(searchValue)
     }
   }
 
@@ -74,8 +100,8 @@ function ChangeToStore() {
     }
   }
 
-   //lưu dữ liệu vào bảng thuê xe
-   const submitChang = () => {
+  //lưu dữ liệu vào bảng thuê xe
+  const submitChang = () => {
     const storeData = {
       nameStore: nameStore,
       address: address,
@@ -128,8 +154,17 @@ function ChangeToStore() {
 
             <div className={cx("group-form-detail")}>
               <h6 className={cx("license")}>Địa chỉ</h6>
-              <div className={cx("wrap-input")}>
-                <input type="text" className={cx("input")} value={address} onChange={handleChangeAddress}></input>
+              <div className={cx('choose-item')}>
+                <div className={cx('choose-item-option')}>
+                  <select className={cx('choose-item-value')} onChange={handleChangeAddress}>
+                    {addressList.map((address, index) => {
+                      return (
+                        <option key={index} value={address.addressId}>{address.addressName}</option>
+                      )
+                    })}
+
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -150,10 +185,10 @@ function ChangeToStore() {
             <div className={cx("group-form-detail")}>
               <h6 className={cx("license")}>Hình ảnh cửa hàng</h6>
               <div className={cx("wrap-input")}>
-                <input type="file" className={cx("input")} value={image} onChange={handleChangeImage}></input>
-                
+                <input type="file" className={cx("input")} onChange={handleChangeImage}></input>
+
               </div>
-             
+
             </div >
 
           </div>
@@ -163,7 +198,7 @@ function ChangeToStore() {
         </div>
 
       </div>
-  
+
     </div>
   );
 }

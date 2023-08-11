@@ -53,7 +53,7 @@ function SingleVehicle() {
     }, []);
 
     //tìm kiếm customer
-    const username = 'Leminh';
+    const username = 'leminh';
     useEffect(() => {
         axiosClient.get(`http://localhost:8080/customers/findById/${username}`)
             .then((response) => {
