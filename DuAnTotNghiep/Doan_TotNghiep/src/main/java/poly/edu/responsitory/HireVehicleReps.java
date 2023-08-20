@@ -17,6 +17,10 @@ import java.util.List;
 @Repository
 public interface HireVehicleReps extends JpaRepository<HireVehicle,Integer> {
 
+    @Query("SELECT o FROM HireVehicle o WHERE o.statusAccept = ?1 and o.vehicle.store.storeId = ?2")
+    List<HireVehicle> getByStatusAcceptAndStoreId(boolean statusAccept,Integer storeId);
+
+
     @Query("SELECT new poly.edu.dto.VehicleRevenue(v.vehicleId,v.image,v.rentByDay,v.description,v.vehicleName,count(h.vehicle.vehicleId),v.address,v.store ,sum(h.totalMoney)) from Vehicle v left join HireVehicle h " +
             "on v.vehicleId= h.vehicle.vehicleId where month(h.hireDate) = ?1 and v.store.storeId = ?2 group by v.vehicleId,v.image,v.rentByDay,v.description,v.vehicleName,v.address,v.store ")
     List<VehicleRevenue> getRevenueByMonth(Integer month,Integer storeId);

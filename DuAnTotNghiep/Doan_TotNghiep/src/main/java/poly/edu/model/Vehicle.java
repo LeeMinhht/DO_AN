@@ -26,6 +26,7 @@ public class Vehicle implements Serializable {
     private String image3;
     private Boolean statusHiring; //trạng thái đã được thuê hay chưa
     private Boolean vehicleType;
+    private Boolean statusAccept;
     @Column(columnDefinition = "nvarchar(100) not null")
     private String description;
     @ManyToOne

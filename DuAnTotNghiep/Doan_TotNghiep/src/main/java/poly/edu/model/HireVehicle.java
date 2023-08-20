@@ -21,6 +21,7 @@ public class HireVehicle implements Serializable {
     @Column(name = "hireid")
     private Integer hireId;
     private Boolean status;
+    private Boolean statusAccept;
     private Double totalMoney;
 
     @Temporal(TemporalType.DATE)

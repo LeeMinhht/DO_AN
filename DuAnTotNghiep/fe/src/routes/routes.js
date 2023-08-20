@@ -20,6 +20,8 @@ import History from '~/pages/History/History'
 import Revenue from '~/pages/Store/Revenue/Revenue'
 import AllVehicle from '~/pages/AllVehicle/Allvehicle'
 import Payment from '~/layouts/components/Payment/Payment'
+import EditProfile from '~/pages/Profile/Edit/EditProfile'
+import HireRequired from '~/pages/Store/HireRequired/HireRequired'
 
 
 
@@ -32,6 +34,7 @@ const publicRouter = [
     {path: config.routes.changeToStore , component: ChangeToStore},
     {path: config.routes.store , component: ListStore,layout:HeaderOnly},
     {path: config.routes.ManagerStore, component: ManagerStore, layout:HeaderOnly},
+    {path: config.routes.HireRequired, component: HireRequired, layout:HeaderOnly},
     {path: config.routes.StoreInformation, component: StoreInfomation, layout:HeaderOnly},
     {path: config.routes.addVehicle, component: AddVehicle, layout:HeaderOnly},
     {path: config.routes.search, component: Search, layout:HeaderOnly},
@@ -39,6 +42,7 @@ const publicRouter = [
     {path: config.routes.revenue, component: Revenue, layout:HeaderOnly},
     {path: config.routes.allVehicle, component: AllVehicle, layout:HeaderOnly},
     {path: config.routes.payment, component: Payment, layout:HeaderOnly},
+    {path: config.routes.editProfile, component: EditProfile, layout:HeaderOnly},
 ]
 const privateRouter = [] 
 

@@ -39,12 +39,11 @@ function ProductItem({vehicle}) {
                   <p className={cx('desc-nameVehicle')}>{vehicle.vehicleName}</p>
                 </div>
                 <div className={cx('desc-info')}>
-                  <div className={cx('start-number')}>
-                    <FontAwesomeIcon className={cx('start-rating')} icon={faStar} />
-                  </div>
-                  <span className={cx('start-number')}>5</span>
+                  
+                  
                   <FontAwesomeIcon className={cx('svg-char')} icon={faChartSimple} />
-                  <span className={cx('start-number')}>{vehicle.slThue} lượt thuê</span>
+                  {vehicle.slThue>0?(<span className={cx('start-number')}>{vehicle.slThue} lượt thuê</span>)
+                  :(<span className={cx('start-number')}>0 lượt thuê</span>)}
                 </div>
                 <div className={cx('line')}></div>
                 <div className={cx('address-price')}>

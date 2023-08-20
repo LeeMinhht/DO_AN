@@ -54,4 +54,17 @@ public class HireRestController {
         return hireVehicleService.findHistoryHireByCusUsername(username,status);
     }
 
+    @GetMapping("/findByStatusAccept/{storeId}")
+    public List<HireVehicle> findByStatusAccept(@PathVariable("storeId")Integer storeId){
+        return hireVehicleService.getByStatusAcceptAndStoreId(false,storeId);
+    }
+    @DeleteMapping("/deleteById/{hireId}")
+    public void  deleteById(@PathVariable("hireId") Integer hireId){
+        hireVehicleService.deleteById(hireId);
+    }
+    @PutMapping("/updateHireById/{hireId}")
+    public HireVehicle updateById(@PathVariable("hireId")Integer hireId,@RequestBody HireVehicle hireVehicle){
+        return hireVehicleService.save(hireVehicle);
+    }
+
 }
