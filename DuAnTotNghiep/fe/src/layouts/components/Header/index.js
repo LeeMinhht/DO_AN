@@ -187,7 +187,7 @@ function Header({ searchHiden }) {
               ) : (
 
                 <>
-                  <Button text>Upload</Button>
+                  <Button to={'/regis'} >Register</Button>
                   <Button primary >Log in</Button>
                 </>
               )}

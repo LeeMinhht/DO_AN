@@ -18,7 +18,7 @@ const routes = {
     payment: '/payment',
     login:'/login',
     editProfile: '/editProfile/:cusUsername',
-
+    register:'/regis'
 }
 
 export default routes;

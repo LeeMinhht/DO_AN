@@ -23,6 +23,7 @@ import Payment from '~/layouts/components/Payment/Payment'
 import LoginComponent from '~/pages/Login/Login'
 import EditProfile from '~/pages/Profile/Edit/EditProfile'
 import HireRequired from '~/pages/Store/HireRequired/HireRequired'
+import Register from '~/pages/Register/Register'
 
 
 
@@ -44,6 +45,7 @@ const publicRouter = [
     {path: config.routes.allVehicle, component: AllVehicle, layout:HeaderOnly},
     {path: config.routes.payment, component: Payment, layout:HeaderOnly},
     {path: config.routes.login, component: LoginComponent, layout:HeaderOnly},
+    {path: config.routes.register, component: Register, layout:HeaderOnly},
 
     {path: config.routes.editProfile, component: EditProfile, layout:HeaderOnly},
 ]
