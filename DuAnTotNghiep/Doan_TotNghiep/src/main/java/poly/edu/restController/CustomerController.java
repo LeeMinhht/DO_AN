@@ -63,6 +63,24 @@ public class CustomerController {
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
+    //lock khach hang neu vi pham
+    @PostMapping("/toggleLock/{cusUsername}")
+    public ResponseEntity<String> toggleUserLock(@PathVariable String cusUsername) {
+        Optional<Customer> optionalCus = customerService.findById(cusUsername);
+
+        if (optionalCus.isPresent()) {
+            Customer customer = optionalCus.get();
+            Boolean isLocked = customer.getLockAccount(); // Lấy trạng thái khóa/mở khóa hiện tại
+            customer.setLockAccount(!isLocked); // Đảo ngược trạng thái khóa/mở
+            customerService.save(customer);
+
+            return ResponseEntity.ok("Thay đổi trạng thái khóa thành công.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 }
 

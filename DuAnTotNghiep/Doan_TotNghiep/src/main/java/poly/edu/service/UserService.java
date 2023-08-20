@@ -14,6 +14,8 @@ import java.util.function.Function;
 
 public interface UserService {
 
+    User findByUsername(String username);
+
     User saveUser(User user);
 
     User getUserByUsername(String username);

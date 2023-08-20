@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
+import poly.edu.dto.MonthlyRevenue;
 import poly.edu.dto.StoreDto;
+import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.Customer;
 import poly.edu.model.Store;
 
@@ -15,6 +17,13 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public interface StoreService {
+
+
+    @Query("SELECT NEW poly.edu.dto.MonthlyRevenue(YEAR(s.createDate), MONTH(s.createDate), SUM(s.cartStore)) " +
+            "FROM Store s " +
+            "GROUP BY YEAR(s.createDate), MONTH(s.createDate) " +
+            "ORDER BY YEAR(s.createDate), MONTH(s.createDate)")
+    List<MonthlyRevenue> getMonthlyRevenues();
 
     List<Store> findByNameStoreContaining(String key);
 

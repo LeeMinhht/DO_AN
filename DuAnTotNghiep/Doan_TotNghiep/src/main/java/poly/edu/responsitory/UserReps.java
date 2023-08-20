@@ -7,4 +7,5 @@ import poly.edu.model.User;
 
 @Repository
 public interface UserReps extends JpaRepository<User,String> {
+    User findByUsername(String username);
 }

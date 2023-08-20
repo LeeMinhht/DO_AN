@@ -14,6 +14,7 @@ import java.util.function.Function;
 public interface CustomerService {
 
 
+    Customer findByCusUsername(String cusUsername);
 
     List<Customer> getAll();
 

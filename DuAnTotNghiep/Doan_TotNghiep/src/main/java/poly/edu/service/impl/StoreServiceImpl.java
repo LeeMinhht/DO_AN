@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
+import poly.edu.dto.MonthlyRevenue;
 import poly.edu.dto.StoreDto;
 import poly.edu.model.Store;
 import poly.edu.responsitory.StoreReps;
@@ -24,6 +25,14 @@ public class StoreServiceImpl implements StoreService {
     private StoreReps storeReps;
 
 
+    @Override
+    @Query("SELECT NEW poly.edu.dto.MonthlyRevenue(YEAR(s.createDate), MONTH(s.createDate), SUM(s.cartStore)) " +
+            "FROM Store s " +
+            "GROUP BY YEAR(s.createDate), MONTH(s.createDate) " +
+            "ORDER BY YEAR(s.createDate), MONTH(s.createDate)")
+    public List<MonthlyRevenue> getMonthlyRevenues() {
+        return storeReps.getMonthlyRevenues();
+    }
 
     @Override
     public List<Store> findByNameStoreContaining(String key) {

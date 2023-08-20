@@ -6,5 +6,5 @@ import poly.edu.model.Customer;
 
 @Repository
 public interface CustomerReps extends JpaRepository<Customer, String> {
-
+    Customer findByCusUsername(String cusUsername);
 }

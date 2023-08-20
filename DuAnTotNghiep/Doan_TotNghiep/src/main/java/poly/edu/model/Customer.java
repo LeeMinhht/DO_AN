@@ -27,6 +27,7 @@ public class Customer implements Serializable {
     private Boolean gender;
     private String identityCard; // Số chứng minh nhân dân
     private String license;  //Bằng lái xe
+    private Boolean lockAccount = false;
     @ManyToOne
     @JoinColumn(name = "addressId")
     Address address;

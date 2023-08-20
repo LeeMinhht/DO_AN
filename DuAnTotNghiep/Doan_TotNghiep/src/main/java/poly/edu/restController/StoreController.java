@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import poly.edu.dto.MonthlyRevenue;
 import poly.edu.dto.StoreDto;
+import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.Customer;
 import poly.edu.model.HireVehicle;
 import poly.edu.model.Store;
@@ -79,4 +81,9 @@ public class StoreController {
         int count  = storeService.getAll().size();
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
+    @GetMapping("/revenues")
+    public List<MonthlyRevenue> getMonthlyRevenues() {
+        return storeService.getMonthlyRevenues();
+    }
+
 }

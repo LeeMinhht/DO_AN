@@ -3,7 +3,9 @@ package poly.edu.responsitory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import poly.edu.dto.MonthlyRevenue;
 import poly.edu.dto.StoreDto;
+import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.Brand;
 import poly.edu.model.Customer;
 import poly.edu.model.Store;
@@ -23,6 +25,13 @@ public interface StoreReps extends JpaRepository<Store,Integer> {
 
     @Query("select v.store from Vehicle v where v.vehicleId = ?1")
     Store findStoreByVehicleId(Integer vehicleId);
+
+
+    @Query("SELECT NEW poly.edu.dto.MonthlyRevenue(YEAR(s.createDate), MONTH(s.createDate), SUM(s.cartStore)) " +
+            "FROM Store s " +
+            "GROUP BY YEAR(s.createDate), MONTH(s.createDate) " +
+            "ORDER BY YEAR(s.createDate), MONTH(s.createDate)")
+    List<MonthlyRevenue> getMonthlyRevenues();
 
 
 
