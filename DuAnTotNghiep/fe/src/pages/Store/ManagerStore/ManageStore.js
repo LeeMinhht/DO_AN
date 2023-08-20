@@ -21,10 +21,11 @@ function ManagerStore() {
     const { storeId } = useParams();
     const [vehicles, setVehicles] = useState([])
     const [store, setStore] = useState({})
+    const [status, setStatus] = useState(false)
 
     //tìm kiếm vehicles theo store
     useEffect(() => {
-        axiosClient.get(`http://localhost:8080/vehicle/findByStoreId/${storeId}`)
+        axiosClient.get(`http://localhost:8080/vehicle/findByStoreId/${storeId},${status}`)
             .then((response) => {
                 const data = response;
                 setVehicles(data);
@@ -33,7 +34,7 @@ function ManagerStore() {
             .catch(() => {
                 console.log('error')
             });
-    }, []);
+    }, [status]);
 
     //tìm kiếm store theo storeId
     useEffect(() => {
@@ -47,6 +48,15 @@ function ManagerStore() {
                 console.log('error')
             });
     }, []);
+
+    const handleSelectStatus = (e) => {
+        console.log(status)
+        const searchValue = e.target.value;
+
+        if (!searchValue.startsWith(' ')) {
+            setStatus(searchValue)
+        }
+    }
 
     return (
         <div className={cx('Manager-store')}>
@@ -66,10 +76,9 @@ function ManagerStore() {
                             <div className={cx('filter-status')}>
                                 <p>Trạng thái: </p>
                                 <div className={cx('custom-select')}>
-                                    <select>
-                                        <option value="0">Tất cả</option>
-                                        <option value="2">Đang hoạt động</option>
-                                        <option value="5">Đang Cho thuê</option>
+                                    <select onChange={handleSelectStatus}>
+                                        <option value={true}>Đang hoạt động</option>
+                                        <option value={false}>Đang Cho thuê</option>
                                     </select>
                                 </div>
                             </div>

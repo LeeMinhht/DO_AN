@@ -41,7 +41,7 @@ public class CustomerController {
     // API để cập nhật thông tin khách hàng
     @PutMapping("/update/{cusUsername}")
     public Customer update(@PathVariable("cusUsername") String cusUsername,@RequestBody Customer customer){
-        return customerService.saveAndFlush(customer);
+        return customerService.save(customer);
     }
 
     // API để xóa một khách hàng

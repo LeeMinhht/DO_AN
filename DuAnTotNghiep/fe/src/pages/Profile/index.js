@@ -157,7 +157,7 @@ function Profile() {
 
                 </div>
                 <div className={cx('btn-group')}>
-                  <Button primary green small>Chỉnh sửa</Button>
+                  <Button to={`/editProfile/${customer.cusUsername}`} primary green small>Chỉnh sửa</Button>
                   <Button primary green small>Đổi mật khẩu</Button>
                   <Button primary green small to={`/payment`}>Nạp tiền</Button>
                   {store.length === 0 ? (<Button to={`/changeToStore/${customer.cusUsername}`} primary green small>chuyển đổi cửa hàng</Button>)

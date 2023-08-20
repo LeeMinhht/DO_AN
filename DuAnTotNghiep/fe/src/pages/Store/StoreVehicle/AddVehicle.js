@@ -21,14 +21,14 @@ function AddVehicle() {
     const [store, setStore] = useState({});
     const [addresss, setAddresss] = useState([]);
     const [address, setAddress] = useState({});
-    const [addressId, setAddressId] = useState('');
+    const [addressId, setAddressId] = useState(1);
     const [brand, setBrand] = useState({});
     const [image, setImage] = useState(null);
     const [image2, setImage2] = useState(null);
     const [image3, setImage3] = useState(null);
 
     const [brands, setBrands] = useState([]);
-    const [brandId, setBrandId] = useState("");
+    const [brandId, setBrandId] = useState(1);
 
 
     //tìm kiếm all Brand
@@ -156,7 +156,8 @@ function AddVehicle() {
             image: image,
             image2: image2,
             image3: image3,
-            statusHiring: false,
+            statusHiring: true,
+            vehicleType: true,
             description: description,
             store: store,
             brand: brand,

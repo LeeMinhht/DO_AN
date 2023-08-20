@@ -27,6 +27,12 @@ function SidebarStore({ store, cusUsername }) {
                             </div>
                             <p>Xe của tôi</p>
                         </NavLink>
+                        <NavLink className={(nav) => cx('sidebar-item', { active: nav.isActive })} to={`/hireRequired/${store.storeId}`}>
+                            <div className={cx('wrap-svg')}>
+                                <FontAwesomeIcon className={cx('item-icon')} icon={faMoneyBill1}/>
+                            </div>
+                            <p>Yêu cầu thuê xe</p>
+                        </NavLink>
                         <NavLink className={(nav) => cx('sidebar-item', { active: nav.isActive })} to={`/managerStore/information/${store.storeId}`}>
                             <div className={cx('wrap-svg')}>
                                 <FontAwesomeIcon className={cx('item-icon')} icon={faUser} />
@@ -47,6 +53,7 @@ function SidebarStore({ store, cusUsername }) {
                             </div>
                             <p>Doanh thu</p>
                         </NavLink>
+                      
 
                     </nav>
                 </div>

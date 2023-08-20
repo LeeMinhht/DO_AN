@@ -83,9 +83,9 @@ public class VehicleController {
     public String getBrandId(@PathVariable("vehicleId") Integer vehicleId){
         return brandService.findBrandIdByVehicleId(vehicleId);
     }
-    @GetMapping("/findByStoreId/{storeId}")
-    public List<VehicleDto> getVehicleByStoreId(@PathVariable("storeId") Integer storeId){
-        return vehicleSerivce.findByStoreId(storeId);
+    @GetMapping("/findByStoreId/{storeId},{status}")
+    public List<VehicleDto> getVehicleByStoreId(@PathVariable("storeId") Integer storeId,@PathVariable("status") Boolean status){
+        return vehicleSerivce.findByStoreId(storeId,status);
     }
 
     @GetMapping("/findVehicleByCustomerWasHire/{cusUsername}")

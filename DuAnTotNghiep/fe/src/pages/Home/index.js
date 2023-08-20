@@ -13,16 +13,22 @@ import TopAddress from './TopAddress/TopAddress';
 import Advantage from './Advantage/Advantage';
 
 
+
 const cx = classNames.bind(styles)
 
 
 function Home() {
     const [minPrice, setMinPrice] = useState(0)
     const [maxPrice, setMaxPrice] = useState(0)
-    const [addressId, setAddressId] = useState(0)
+    const [addressId, setAddressId] = useState(1)
     const [vehicles, setVehicles] = useState([])
 
     const [addresss, setAddresss] = useState([])
+
+    const [isValidData, setIsValidData] = useState(true);
+
+    //gửi request để check trạng thái nạp tiền
+
     const values = queryString.parse(window.location.search);
     const orderId = values.orderId;
     console.log(orderId);
@@ -63,15 +69,20 @@ const parsedUserData = JSON.parse(storedUserData);
 
     //Tìm kiếm theo vị trí và giá tiền
     const submitFindVehicle = () => {
-        axiosClient.get(`http://localhost:8080/vehicle/findByAddressAndPrice/${addressId},${minPrice},${maxPrice}`)
-            .then((response) => {
-                const data = response;
-                setVehicles(data);
-                console.log(data)
-            })
-            .catch(() => {
-                console.log('không tìm thấy Vehicle')
-            });
+        if (maxPrice <= 0) {
+            alert("Làm ơn chọn giá lớn hơn 0 VND")
+            return;
+        }
+        // axiosClient.get(`http://localhost:8080/vehicle/findByAddressAndPrice/${addressId},${minPrice},${maxPrice}`)
+        //     .then((response) => {
+        //         const data = response;
+        //         setVehicles(data);
+        //         console.log(data)
+        //     })
+        //     .catch(() => {
+        //         console.log('không tìm thấy Vehicle')
+        //     });
+        window.location.href = `/search/${addressId}/${minPrice}/${maxPrice}`;
     }
     const handleMinprice = (e) => {
         const searchValue = e.target.value;
@@ -220,9 +231,9 @@ const parsedUserData = JSON.parse(storedUserData);
                             </div>
 
                         </div>
-                        <Link to={`/search/${addressId}/${minPrice}/${maxPrice}`}>
-                            <Button className={cx('btn-search')} onClick={submitFindVehicle} primary green>Tìm Xe</Button>
-                        </Link>
+
+                        <Button className={cx('btn-search')} onClick={submitFindVehicle}  primary green>Tìm Xe</Button>
+
                     </div>
 
                 </div>

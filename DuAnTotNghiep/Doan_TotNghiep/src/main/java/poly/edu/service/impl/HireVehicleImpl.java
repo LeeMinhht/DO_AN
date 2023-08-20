@@ -25,6 +25,12 @@ public class HireVehicleImpl implements HireVehicleService {
     private HireVehicleReps hireVehicleReps;
 
     @Override
+    @Query("SELECT o FROM HireVehicle o WHERE o.statusAccept = ?1 and o.vehicle.store.storeId = ?2")
+    public List<HireVehicle> getByStatusAcceptAndStoreId(boolean statusAccept, Integer storeId) {
+        return hireVehicleReps.getByStatusAcceptAndStoreId(statusAccept, storeId);
+    }
+
+    @Override
     @Query("SELECT new poly.edu.dto.VehicleRevenue(v.vehicleId,v.image,v.rentByDay,v.description,v.vehicleName,count(h.vehicle.vehicleId),v.address,v.store ,sum(h.totalMoney)) from Vehicle v left join HireVehicle h " +
             "on v.vehicleId= h.vehicle.vehicleId where v.store.storeId = ?1 group by v.vehicleId,v.image,v.rentByDay,v.description,v.vehicleName,v.address,v.store order by sum(h.totalMoney) desc ")
     public List<VehicleRevenue> getRevenueVehicle(Integer storeId) {

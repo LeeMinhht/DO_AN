@@ -105,9 +105,9 @@ public class VehicleServiceImpl implements VehicleSerivce {
     @Override
     @Query("select new poly.edu.dto.VehicleDto(v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring," +
             "v.description,v.address,v.store,v.brand,count(h.vehicle.vehicleId))   " +
-            "from Vehicle v left join HireVehicle h on v.vehicleId=h.vehicle.vehicleId  where v.store.storeId = ?1 group by v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring, v.description,v.address,v.store,v.brand")
-    public List<VehicleDto> findByStoreId(Integer storeId) {
-        return vehicleResp.findByStoreId(storeId);
+            "from Vehicle v left join HireVehicle h on v.vehicleId=h.vehicle.vehicleId  where v.store.storeId = ?1 and v.statusHiring = ?2 group by v.vehicleId,v.vehicleName,v.rentByDay,v.image,v.image2,v.image3,v.statusHiring, v.description,v.address,v.store,v.brand")
+    public List<VehicleDto> findByStoreId(Integer storeId, Boolean status) {
+        return vehicleResp.findByStoreId(storeId, status);
     }
 
     @Override

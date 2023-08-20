@@ -31,9 +31,8 @@ function HireVehicle() {
   }, [searchParams]);
 
   console.log(vehicleId)
-
   // tìm kiếm user
-  const username = 'trannghia';
+  const username = 'leminh';
   useEffect(() => {
     axiosClient.get(`http://localhost:8080/customers/findById/${username}`)
       .then((response) => {

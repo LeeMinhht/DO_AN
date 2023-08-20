@@ -118,6 +118,7 @@ function SingleVehicle() {
 
         const hireVehicleData = {
             status: false,
+            statusAccept: false,
             hireDate: new Date(date.split('/').reverse().join('-')),
             returnDate: returnDate,
             customer: customer,
@@ -130,7 +131,7 @@ function SingleVehicle() {
             const response1 = await axios.post(`http://localhost:8080/hireVehicle/add`, hireVehicleData);
             const hireData = response1.data;
             setHireData(hireData);
-            alert('Bạn đã thuê thành công');
+            alert('Yêu cầu thuê xe thành công');
 
             //set trạng thái xe đã thuê
             vehicle.statusHiring = false;
