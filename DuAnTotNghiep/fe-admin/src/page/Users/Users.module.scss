@@ -1,0 +1,42 @@
+.userTable {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: .0625rem solid rgba(17, 24, 39, .125);
+    border-radius: .5rem;
+    color: black;
+    // align-items: normal;
+
+    .table {
+
+        caption-side: bottom;
+        border-collapse: collapse;
+
+        .userthead {
+            vertical-align: bottom;
+            display: table-header-group;
+            text-align: center;
+        }
+
+        .usertr {
+            border-bottom: 0.001rem solid rgba(0, 0, 0, 0.139);
+            display: table-row;
+            font-size: 18px;
+        }
+
+        .usertd {
+            padding: 0.5rem;
+            display: table-cell;
+            padding-right: 1rem;
+        }
+
+        .usertbody{
+            align-items: normal;
+        }
+
+    }
+
+}

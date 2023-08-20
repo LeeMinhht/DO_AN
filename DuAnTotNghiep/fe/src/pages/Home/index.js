@@ -23,14 +23,31 @@ function Home() {
     const [vehicles, setVehicles] = useState([])
 
     const [addresss, setAddresss] = useState([])
-
-    //gửi request để check trạng thái nạp tiền
-
     const values = queryString.parse(window.location.search);
     const orderId = values.orderId;
     console.log(orderId);
+    
+    const [cusUser, setCusUser] = useState(null)
+    const [userName, setUsername] = useState(null)
+    
+    const storedUserData = localStorage.getItem('user');
+const parsedUserData = JSON.parse(storedUserData);
 
+    //gửi request để check trạng thái nạp tiền
 
+    
+
+    useEffect(() => {
+        const cus = localStorage.getItem("user")
+        console.log(cus);
+        if(cus != null){
+            setCusUser(cus)
+            setUsername(parsedUserData.cusUsername)
+            console.log(parsedUserData.cusUsername);
+        }else{
+            return;
+        }
+    }, []);
 
     //tìm kiếm all Address
     useEffect(() => {
@@ -93,8 +110,11 @@ function Home() {
     return (
 
         <div className={cx('wrapper')}>
+            
             <div className={cx('background-banned')}>
-                <h1 className={cx('home-title')}>Mikaa - Cùng bạn đến mọi Hành trình</h1>
+                <h1 className={cx('home-title')}>
+                {userName}
+                    Mikaa - Cùng bạn đến mọi Hành trình</h1>
             </div >
 
             {/* phần tìm kiếm */}

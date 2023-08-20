@@ -1,0 +1,28 @@
+.menu{
+
+    .imgIcon{
+        color: blue;
+    }
+    .item{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .title{
+        color: rgb(165, 158, 158);
+        font-size: 14px;
+        font-weight: 200;
+    }
+    .titleItem{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        
+        &:hover{
+            background-color: rgb(38, 53, 67);
+        }
+    }
+}

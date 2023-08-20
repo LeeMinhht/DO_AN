@@ -1,0 +1,29 @@
+.home {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+
+   
+
+    .box1, .box2, .box3, .box4, .box5, .box6     {
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid white;
+        background-color: rgb(255, 255, 255);
+       color: black;
+          
+
+    }
+    .box1{
+        grid-column: span 1;
+        grid-row: span 3;
+      }
+      .box6{
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+
+
+
+}

@@ -1,0 +1,23 @@
+.image-logo {
+    width: 100px;
+}
+
+.navbar {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo{
+        font-weight: bold;
+        gap: 10px;
+
+    }
+    .icons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+       
+    }
+   
+}

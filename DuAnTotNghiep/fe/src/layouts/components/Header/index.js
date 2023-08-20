@@ -25,6 +25,7 @@ import Image from "~/Component/Images";
 import Search from "../Search";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import Notification from "~/Component/Notification/Notification";
+import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -58,25 +59,57 @@ const MENU_ITEMS = [
 ];
 
 function Header({ searchHiden }) {
-  const currentUser = true;
+  // const currentUser = true;
 
-  const cusUsername = 'leminh'
-  console.log(cusUsername)
+
+
 
   const handleMenuChange = (menuItem) => {
     console.log(menuItem);
   };
 
+  const [cusUser, setCusUser] = useState(null)
+  const [userName, setUsername] = useState(null)
+
+  const storedUserData = localStorage.getItem('user');
+  const parsedUserData = JSON.parse(storedUserData);
+
+  //login
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const cus = localStorage.getItem("user")
+    console.log(cus);
+    if (cus != null) {
+      setCusUser(cus)
+      setUsername(parsedUserData.cusUsername)
+      console.log(parsedUserData.cusUsername);
+
+      setIsLoggedIn(true);
+    } else {
+      return;
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user'); // Thay 'user' bằng khóa bạn đã sử dụng
+
+    console.log("logout1", isLoggedIn);
+    window.location.href = `/login`
+    // setIsLoggedIn(false)
+  };
+
+
+
   const userMenu = [
     {
       icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
       title: "Trang cá nhân",
-      to: "/profile/:cusUsername",
+      to: `/profile/${userName}`,
     },
     {
       icon: <FontAwesomeIcon icon={faRectangleList}></FontAwesomeIcon>,
       title: "Lịch sử thuê xe",
-      to: `/history/${cusUsername}`,
+      to: `/history/${userName}`,
     },
     {
       icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
@@ -96,7 +129,7 @@ function Header({ searchHiden }) {
     (
       <header className={cx("wrapper")}>
         <div className={cx("inner")}>
-          <Link to={config.routes.home} className={cx("logo-link")} onClick={() =>{window.scrollTo(0,0)}}>
+          <Link to={config.routes.home} className={cx("logo-link")} onClick={() => { window.scrollTo(0, 0) }}>
             <img src={images.logo1} alt="MIKKAA" className={cx('logo-img')}></img>
             <h3 className={cx('title-logo')}>Take you everywhere</h3>
           </Link>
@@ -105,51 +138,58 @@ function Header({ searchHiden }) {
           {searchHiden ? (null) : (<Search />)}
 
           <div className={cx("action")}>
-            {currentUser ? (
-              <>
-                <Button className={cx('customer-store')}>Cửa hàng của bạn</Button>
-
-                <Tippy
-                  trigger="click"
-                  interactive
-                  placement="bottom-end"
-                  delay={[0, 500]}
-                  offset={[12, 8]}
-                  render={() => {
-                    return (
-                      <div>
-                        <Notification/>
-                      </div>
-                    );
-                  }}
-                  // onHide={handleResetToFirstPage}
-                >
-                  <button className={cx("action-btn")}>
-                      <FontAwesomeIcon icon={faBell} />
-                  </button>
-                </Tippy>
-              </>
-            ) : (
+            {/* {isLoggedIn ? ( */}
+            <>
+              {isLoggedIn ? (<div>{userName},
+                <button onClick={handleLogout}>Đăng Xuất</button> </div>) :
+                <Button to={`/login`} className={cx('customer-store')}>
+                  Đăng Nhập
+                </Button>}
+              <Tippy
+                trigger="click"
+                interactive
+                placement="bottom-end"
+                delay={[0, 500]}
+                offset={[12, 8]}
+                render={() => {
+                  return (
+                    <div>
+                      <Notification />
+                    </div>
+                  );
+                }}
+              // onHide={handleResetToFirstPage}
+              >
+                <button className={cx("action-btn")}>
+                  <FontAwesomeIcon icon={faBell} />
+                </button>
+              </Tippy>
+            </>
+            {/* ) : (
               <>
                 <Button text>Upload</Button>
                 <Button primary >Log in</Button>
               </>
-            )}
+            )} */}
 
             <Menu
-              items={currentUser ? userMenu : MENU_ITEMS}
+              items={isLoggedIn ? MENU_ITEMS : userMenu}
               onChange={handleMenuChange}
             >
-              {currentUser ? (
+              {isLoggedIn ? (
                 <Image
                   src="https://files.fullstack.edu.vn/f8-prod/user_photos/199187/627002074c706.jpg"
                   className={cx("user-avatar")}
                   alt="Le Van Minh"
-                ></Image>
+                >
+
+                </Image>
               ) : (
-                <button className={cx("more-btn")}>
-                  <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
-                </button>
+
+                <>
+                  <Button text>Upload</Button>
+                  <Button primary >Log in</Button>
+                </>
               )}
             </Menu>
           </div>

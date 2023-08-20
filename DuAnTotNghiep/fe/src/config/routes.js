@@ -15,7 +15,7 @@ const routes = {
     live: '/live',
     allVehicle: '/allVehicle',
     payment: '/payment',
-
+    login:'/login'
 }
 
 export default routes;

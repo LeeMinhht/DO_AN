@@ -1,0 +1,51 @@
+.listUser {
+    color: black;
+    .Widget_title {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        .Widget_search {
+            border-radius: 5px;
+            border: 0.5px solid wheat;
+        }
+    }
+
+    
+    .user{
+        margin-bottom: 20px ;
+        display: flex;
+        justify-content: space-between;
+        // border-bottom: 1px solid white;
+        align-items: center;
+
+       
+
+        
+        .userdetail{
+            // padding: 5px;
+            gap: 10px;
+            display: flex;
+
+            .img{
+                width: 40px;
+                border-radius: 50%;
+               margin-right: 5px;
+            }
+
+            .email{
+                font-size: 12px;
+                font-weight: 100;
+            }
+
+            .userText{
+                display: flex;
+                flex-direction: column;
+            }
+            }
+        .fullname{
+            display: flex;
+            font-weight: 200;
+        }
+    }
+
+}

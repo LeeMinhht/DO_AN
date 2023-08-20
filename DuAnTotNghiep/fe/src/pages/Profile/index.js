@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import styles from './Profile.module.scss'
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
+import { useParams } from "react-router-dom";
 import axiosClient from "~/scrips/healper/axiosClient";
 import Image from "~/Component/Images";
 import images from "~/assets/images";
@@ -10,21 +11,31 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUsers } from "@fortawesome/free-solid-svg-icons";
 import ProductItem from "~/Component/ProductItem/ProductItem";
-import axios from "axios";
 
 const cx = classNames.bind(styles)
 
 function Profile() {
+
+
+
   const [customer, setCustomer] = useState({})
   const [store, setStore] = useState({})
   const [hireVehicles, setHireVehicles] = useState([])
   const [vehicles, setVehicles] = useState([])
   const [addressName, setAddressName] = useState(null)
 
-  const username = 'leminh';
-  console.log(username);
+  // const { userName } = useParams();
+  
+  const storedUserData = localStorage.getItem('user');
+  const parsedUserData = JSON.parse(storedUserData);
+  const userName = parsedUserData.cusUsername;
+
+
+
+
+  // console.log(username);
   useEffect(() => {
-    axiosClient.get(`http://localhost:8080/customers/findById/${username}`)
+    axiosClient.get(`http://localhost:8080/customers/findById/${userName}`)
       .then((response) => {
         const data = response;
         setCustomer(data);
@@ -34,12 +45,13 @@ function Profile() {
       })
       .catch(() => {
         console.log('không tìm thấy user')
-      });
-  }, [username]);
+         
+        });
+  }, [userName]);
 
   //tìm kiếm store theo username
   useEffect(() => {
-    axiosClient.get(`http://localhost:8080/store/findByCustomer/${username}`)
+    axiosClient.get(`http://localhost:8080/store/findByCustomer/${userName}`)
       .then((response) => {
         const data = response;
         console.log(data);
@@ -53,7 +65,7 @@ function Profile() {
 
   //Tìm kiếm các lượt thuê xe theo username
   useEffect(() => {
-    axiosClient.get(`http://localhost:8080/hireVehicle/findHireByCusUsername/${username}`)
+    axiosClient.get(`http://localhost:8080/hireVehicle/findHireByCusUsername/${userName}`)
       .then((response) => {
         const data = response;
         setHireVehicles(data);
@@ -61,11 +73,11 @@ function Profile() {
       .catch(() => {
         console.log('không tìm thấy hireVehicle')
       });
-  }, [username]);
+  }, [userName]);
 
   //Tìm kiếm các xe đã thuê theo username
   useEffect(() => {
-    axiosClient.get(`http://localhost:8080/vehicle/findVehicleByCustomerWasHire/${username}`)
+    axiosClient.get(`http://localhost:8080/vehicle/findVehicleByCustomerWasHire/${userName}`)
       .then((response) => {
         const data = response;
         setVehicles(data);
@@ -73,7 +85,7 @@ function Profile() {
       .catch(() => {
         console.log('không tìm thấy Vehicle')
       });
-  }, [username]);
+  }, [userName]);
 
 
 
@@ -113,11 +125,11 @@ function Profile() {
                 </div>
               </div>
               <div className={cx('box-wrapper')}>
-              <div className={cx('content')}>
-              <h4 className={cx('title')}>Thông tin</h4>
-              </div>
+                <div className={cx('content')}>
+                  <h4 className={cx('title')}>Thông tin</h4>
+                </div>
                 <div className={cx('info-box')}>
-                  
+
                   <div className={cx('info-box-item')}>
                     <p>Tên đăng nhập</p>
                     <p className={cx('main')}>{customer.cusUsername}</p>
@@ -140,7 +152,7 @@ function Profile() {
                   </div>
                   <div className={cx('info-box-item')}>
                     <p>Tài khoản</p>
-                    <p className={cx('main')}>{customer.cart?(customer.cart.toLocaleString('vi-VN', { minimumFractionDigits: 0 })):(null)}đ</p>
+                    <p className={cx('main')}>{customer.cart ? (customer.cart.toLocaleString('vi-VN', { minimumFractionDigits: 0 })) : (null)}đ</p>
                   </div>
 
                 </div>
@@ -149,11 +161,11 @@ function Profile() {
                   <Button primary green small>Đổi mật khẩu</Button>
                   <Button primary green small to={`/payment`}>Nạp tiền</Button>
                   {store.length === 0 ? (<Button to={`/changeToStore/${customer.cusUsername}`} primary green small>chuyển đổi cửa hàng</Button>)
-                    : (<Button to={`/store/${customer.cusUsername}`} primary green small onClick={() =>{
-                      
-                        window.scrollTo(0, 0);
-                      
-                    
+                    : (<Button to={`/store/${customer.cusUsername}`} primary green small onClick={() => {
+
+                      window.scrollTo(0, 0);
+
+
                     }}>Cửa hàng của bạn</Button>)}
                 </div>
               </div>
