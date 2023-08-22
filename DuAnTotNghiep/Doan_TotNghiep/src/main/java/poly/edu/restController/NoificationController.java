@@ -26,6 +26,9 @@ public class NoificationController {
 
     @GetMapping("/findByUsername/{cusUsername}")
     public List<Notification> findByUsername(@PathVariable("cusUsername") String username){
+        if(username == null){
+            return  null;
+        }
         return notificationService.findAllByCustomer_CusUsername(username);
     }
 

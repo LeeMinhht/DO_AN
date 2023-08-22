@@ -141,29 +141,33 @@ function Header({ searchHiden }) {
             {/* {isLoggedIn ? ( */}
             <>
               {isLoggedIn ? (<div>{userName},
-                <button onClick={handleLogout}>Đăng Xuất</button> </div>) :
+                <button onClick={handleLogout}>Đăng Xuất</button>,
+                <Tippy
+                  trigger="click"
+                  interactive
+                  placement="bottom-end"
+                  delay={[0, 500]}
+                  offset={[12, 8]}
+                  render={() => {
+                    return (
+                      <div>
+                        <Notification />
+                      </div>
+                    );
+                  }}
+                // onHide={handleResetToFirstPage}
+                >
+                  <button className={cx("action-btn")}>
+                    <FontAwesomeIcon icon={faBell} />
+                  </button>
+                </Tippy> </div>) : 
+                (
                 <Button to={`/login`} className={cx('customer-store')}>
                   Đăng Nhập
-                </Button>}
-              <Tippy
-                trigger="click"
-                interactive
-                placement="bottom-end"
-                delay={[0, 500]}
-                offset={[12, 8]}
-                render={() => {
-                  return (
-                    <div>
-                      <Notification />
-                    </div>
-                  );
-                }}
-              // onHide={handleResetToFirstPage}
-              >
-                <button className={cx("action-btn")}>
-                  <FontAwesomeIcon icon={faBell} />
-                </button>
-              </Tippy>
+                </Button>)
+              }
+                
+                
             </>
             {/* ) : (
               <>
@@ -188,7 +192,7 @@ function Header({ searchHiden }) {
 
                 <>
                   <Button to={'/regis'} >Register</Button>
-                  <Button primary >Log in</Button>
+                  <Button primary to={`/login`} >Log in</Button>
                 </>
               )}
             </Menu>

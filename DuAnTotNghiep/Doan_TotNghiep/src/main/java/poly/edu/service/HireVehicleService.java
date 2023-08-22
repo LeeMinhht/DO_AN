@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.transaction.annotation.Transactional;
 import poly.edu.dto.HireDto;
 import poly.edu.dto.RevenueDto;
+import poly.edu.dto.TopRentedVehicleDTO;
 import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.HireVehicle;
 
@@ -19,6 +20,9 @@ import java.util.function.Function;
 
 public interface HireVehicleService {
 
+
+    @Query(value = "SELECT new poly.edu.dto.TopRentedVehicleDTO(hv.vehicle.vehicleId,hv.vehicle.vehicleName, COUNT(*)) FROM HireVehicle hv GROUP BY hv.vehicle.vehicleId,hv.vehicle.vehicleName ORDER BY COUNT(*) DESC")
+    List<TopRentedVehicleDTO> findTopRentedVehicles();
 
     @Query("SELECT o FROM HireVehicle o WHERE o.statusAccept = ?1 and o.vehicle.store.storeId = ?2")
     List<HireVehicle> getByStatusAcceptAndStoreId(boolean statusAccept, Integer storeId);

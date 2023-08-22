@@ -22,21 +22,19 @@ function Vehicle() {
   return (
     <div>
       <div className={cx('listStore')}>
-        <div className={cx('title')}>List Store</div>
         <div className={cx('box-table')}>
           <table className={cx('table')}>
             <thead className={cx('thead')}>
               <tr className={cx('tr')}>
-                <th>Tên Xe</th>
-                <th>Giá thuê</th>
-                <th>Trạng thái</th>
-                <th>Kiểu Xe</th>
-                <th>Thông tin</th>
-                <th>Địa Chỉ</th>
-                <th>Cửa Hàng</th>
-                <th>Hãng xe</th>
-                <th>Báo cáo</th>
+                <th className={cx('th')}>Tên Xe</th>
+                <th className={cx('th')}>Giá thuê</th>
+                <th className={cx('th')}>Trạng thái</th>
+                <th className={cx('th')}>Kiểu Xe</th>
 
+                <th className={cx('th')}>Địa Chỉ</th>
+                <th className={cx('th')}>Cửa Hàng</th>
+                <th className={cx('th')}>Hãng xe</th>
+                <th className={cx('th')}>Thông tin</th>
                 {/* <th>Action</th> */}
               </tr>
             </thead>
@@ -45,12 +43,13 @@ function Vehicle() {
                 <tr>
                   <th>{item.vehicleName}</th>
                   <th>{formatCurrency(item.rentByDay)}</th>
-                  <td>{item.statusHiring ? 'Đang thuê' :'Chưa Thuê'}</td>
-                  <td>{item.vehicleType}</td>
-                  <td>{item.description}</td>
+                  <td>{item.statusHiring ? 'Đang thuê' : 'Chưa Thuê'}</td>
+                  <td>{item.vehicleType ? '4 chỗ' : '7 chỗ'}</td>
                   <td>{item.address.addressName}</td>
                   <td>{item.store.nameStore}</td>
                   <td>{item.brand.nameBrand}</td>
+                  <td ><textarea className={cx('textarea')}  name="" id="" cols="15" rows="2">{item.description}</textarea></td>
+
                   {/* <td>{item.reports.status}</td> */}
 
                   {/* <td>

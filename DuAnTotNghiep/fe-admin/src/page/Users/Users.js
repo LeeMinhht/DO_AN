@@ -9,6 +9,46 @@ import DeleteUser from './DeleteUser/DeleteUser';
 
 const cx = classnames.bind(styles);
 
+
+function formatPhoneNumber(phoneNumber) {
+  if (!phoneNumber) return '';
+  const cleanedNumber = phoneNumber.replace(/\D/g, '');
+
+  // Tách số điện thoại thành các phần: [prefix, middle, suffix]
+  const prefix = cleanedNumber.substring(0, 4);    
+  const middle = cleanedNumber.substring(4, 7);    
+  const suffix = cleanedNumber.substring(7);      
+
+  // Kết hợp các phần thành số điện thoại định dạng "prefix middle suffix"
+  return `${prefix} ${middle} ${suffix}`;
+}
+
+function formatLicense(license) {
+  if (!license) return '';
+  const cleanedLicense = license.replace(/\D/g, '');
+
+  // Tách số GPLX thành các phần: [prefix, middle, suffix]
+  const prefix = cleanedLicense.substring(0, 4);    // Example: 1234
+  const middle = cleanedLicense.substring(4, 7);    // Example: 567
+  const suffix = cleanedLicense.substring(7);       // Example: 890
+
+  // Kết hợp các phần thành số GPLX định dạng "prefix middle suffix"
+  return `${prefix} ${middle} ${suffix}`;
+}
+
+function formatIdentityCard(identityCard) {
+  if (!identityCard) return '';
+  const cleanedIdentityCard = identityCard.replace(/\D/g, '');
+
+  // Tách số CMND thành các phần: [prefix, middle, suffix]
+  const prefix = cleanedIdentityCard.substring(0, 3);    // Example: 123
+  const middle = cleanedIdentityCard.substring(3, 6);    // Example: 456
+  const suffix = cleanedIdentityCard.substring(6);       // Example: 789
+
+  // Kết hợp các phần thành số CMND định dạng "prefix middle suffix"
+  return `${prefix} ${middle} ${suffix}`;
+}
+
 function Users() {
   const [userData, setUserData] = useState([]);
   // const [storeData,setStore] = useState([]);
@@ -59,7 +99,7 @@ function Users() {
       { Header: 'ID', accessor: 'cusUsername' },
       { Header: 'Họ và tên', accessor: 'fullname' },
       { Header: 'Email', accessor: 'email' },
-      { Header: 'Điện Thoại', accessor: 'phone' },
+      { Header: 'Điện Thoại', accessor: 'phone', Cell: ({ value }) => formatPhoneNumber(value) },
       {
         Header: 'Giới tính',
         accessor: 'gender',
@@ -68,22 +108,24 @@ function Users() {
       {
         Header: 'Địa chỉ',
         accessor: 'address.addressName',
-      }, {
+      },
+      {
         Header: 'Số CMND',
         accessor: 'identityCard',
+        Cell: ({ value }) => formatIdentityCard(value),
       },
       {
         Header: 'Số GPLX',
         accessor: 'license',
+        Cell: ({ value }) => formatLicense(value),
       },
       {
         Header: 'Tên cửa hàng',
         accessor: 'storeNames',
-        Cell: ({ value }) => value || 'Chưa có cửa hàng', // Hiển thị 'Chưa có cửa hàng' nếu không có tên cửa hàng.
-
+        Cell: ({ value }) => value || 'Chưa có cửa hàng',
       },
       {
-        Header: 'Acction',
+        Header: 'Khóa Tài Khoản',
         Cell: ({ value, row }) => (
           <DeleteUser user={row.original} onDelete={fetchUserData} />
         ),
@@ -120,7 +162,7 @@ function Users() {
           {headerGroups.map(headerGroup => (
             <tr className={cx('usertr')} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th className={cx('userth')} {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}

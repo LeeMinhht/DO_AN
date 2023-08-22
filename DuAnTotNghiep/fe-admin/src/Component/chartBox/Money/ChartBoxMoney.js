@@ -47,13 +47,17 @@ const RevenueChart = () => {
   return tooltipFormatted;
 };
   return (
-    <BarChart  width={400} height={300} data={completeData}>
+    <div className={cx('chart')}>
+       <BarChart className={cx('barchart')} width={800} height={300} data={completeData}>
       {/* <CartesianGrid strokeDasharray="3 3" /> */}
       <XAxis dataKey="month" />
       <YAxis tickFormatter={formatCurrency} fontSize={12}/>
-      <Tooltip  formatter={(value, name) => combineFormatters(value, name)}  />
+      <Tooltip   formatter={(value, name) => combineFormatters(value, name)}  />
       <Bar  dataKey="totalRevenue" fill="#8884d8"  />
     </BarChart>
+
+    </div>
+   
   );
 };
 

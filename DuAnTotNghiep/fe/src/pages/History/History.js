@@ -24,7 +24,11 @@ function History() {
     const [customer, setCustomer] = useState({});
     const [rating, setRating] = useState(1);
 
-    const [cusUsername, setCusUsername] = useState('leminh');
+    const storedUserData = localStorage.getItem('user');
+    const parsedUserData = JSON.parse(storedUserData);
+    const userName = parsedUserData.cusUsername;
+
+    const [cusUsername, setCusUsername] = useState(userName);
 
     const submitShowFormDialog = (hireId) => {
         setHireId(hireId);
@@ -94,11 +98,11 @@ function History() {
 
     //lưu dữ liệu vào Comment
     const submitComment = () => {
-        
-    if(note===null){
-        alert("Vui lòng nhập đánh giá")
-        return ;
-    }
+
+        if (note === null) {
+            alert("Vui lòng nhập đánh giá")
+            return;
+        }
         const CommentData = {
             note: note,
             commentDate: new Date(new Date().getTime()),
@@ -154,8 +158,8 @@ function History() {
                                     return (
                                         <div className={cx('item-car-row')}>
                                             <div className={cx('item-box')}>
-                                                <Link to={`/singleVehicle/${hire.vehicleId}`} onClick={() =>{
-                                                     window.scrollTo(0, 0);
+                                                <Link to={`/singleVehicle/${hire.vehicleId}`} onClick={() => {
+                                                    window.scrollTo(0, 0);
                                                 }}>
                                                     <div className={cx('img-car')}>
                                                         <div className={cx('fix-img')}>

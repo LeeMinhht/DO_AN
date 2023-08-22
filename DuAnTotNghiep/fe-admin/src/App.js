@@ -9,17 +9,19 @@ import Users from './page/Users/Users';
 import Vehicles from './page/Vehicle/Vehicle';
 import Home from './page/home/Home';
 import Navbar from './Component/navbar/Navbar';
-import Footer from './Component/footer/Footer';
+import Footer from './Component/Footer/Footer';
 import Menu from './Component/menu/Menu';
 import Login from './page/login/Login';
 import Store from './page/store/Store';
 import classnames from "classnames/bind";
 import styles from '../src/styles/Global.module.scss'
 import ListStore from './page/store/ListStore';
+import Hirevehicle from './page/hireVehicle/Hirevehicle';
 
 const cx = classnames.bind(styles)
 
 function App() {
+
   const Layout =()=>{
     return (
       <div className={cx('main')}>
@@ -36,13 +38,20 @@ function App() {
       </div>
     )
   }
+  const LoginLayout =()=>{
+    return (
+      <div className={cx('main')}>
+       <Login></Login>
+      </div>
+    )
+  }
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/admin",
       element: <Layout/>,
       children:[
         {
-          path: "/",
+          path: "/admin",
           element: (
             <Home></Home>
           ),
@@ -56,12 +65,16 @@ function App() {
         },{
           path:"store",
           element:<ListStore/>
+        },
+        {
+          path:"hire",
+          element:<Hirevehicle/>
         }
       ]
     },
     {
-      path: "login",
-      element: <Login/>,
+      path: "/",
+      element: <LoginLayout/>
     }
   ]);
   return (

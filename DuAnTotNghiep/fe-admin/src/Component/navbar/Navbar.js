@@ -1,23 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from "classnames/bind";
 import styles from './Navbar.module.scss'
-import { FaSearch, FaUserAlt } from 'react-icons/fa';
-import { AiFillSetting } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+
 
 const cx = classnames.bind(styles);
 
 const Navbar = () => {
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('user'); // Thay 'user' bằng khóa bạn đã sử dụng
+
+
+    window.location.href = `/login`
+
+  };
+
   return (
     <div className={cx('navbar')}>
       <div className={cx('logo')}>
-        <img className={cx('image-logo')} src='./image/logo-full.ea382559.png' alt='logo' />
-        <span>Admin mangager</span>
-      </div>
-      <div className={cx('icons')}>
 
-        <FaSearch className={cx('icon')} />
-        <FaUserAlt />
-        <AiFillSetting> </AiFillSetting>
+
+
+        <h3 className={cx('title-logo')}> <img className={cx("main-img-inf")} alt='' src='../image/mikaa (1).png' />Take you everywhere</h3>
+      </div>
+      <div className={cx('btn')}>
+        <button className={cx('btn btn-outline-dark')} onClick={handleLogout}>Đăng Xuất</button>
       </div>
     </div>
   )

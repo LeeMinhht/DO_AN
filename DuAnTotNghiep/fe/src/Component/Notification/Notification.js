@@ -9,12 +9,22 @@ import axios from "axios";
 
 
 const cx = classNames.bind(styles)
-const username = 'leminh';
+
+
+
+
+// const [username, setUsername] = useState(null)
+// const storedUserData = localStorage.getItem('user');
+
+// const parsedUserData = JSON.parse(storedUserData);
+// const username = parsedUserData.cusUsername;
+
+
+ const username = "nghia123";
 
 
 function Notification(props) {
-    const [notifications, setNotifications] = useState([])
-
+const [notifications, setNotifications] = useState([])
 
 
     useEffect(() => {
@@ -28,25 +38,25 @@ function Notification(props) {
             });
     }, []);
 
-    useEffect(() => {
-        // Lấy danh sách thông báo từ API
-        const fetchNotifications = async () => {
-          try {
-            const response = await axios.get(`http://localhost:8080/notifications/findByUsername/${username}`);
-            setNotifications(response.data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-    
-        fetchNotifications();
-      }, []);
-    
+    // useEffect(() => {
+    //     // Lấy danh sách thông báo từ API
+    //     const fetchNotifications = async () => {
+    //         try {
+    //             const response = await axios.get(`http://localhost:8080/notifications/findByUsername/${username}`);
+    //             setNotifications(response.data);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+
+    //     fetchNotifications();
+    // }, []);
+
     //   // Hàm xử lý khi nhận được thông báo mới
     //   const dispatch = useDispatch();
     //   const notifications = useSelector((state) => state.notifications.list);
     //   const [socket, setSocket] = useState(null);
-    
+
     //   useEffect(() => {
     //     // Gửi request API để lấy danh sách notifications ban đầu
     //     axios.get(`http://localhost:8080/notifications/findByUsername/${username}`)
@@ -56,29 +66,30 @@ function Notification(props) {
     //       .catch((error) => {
     //         console.log(error);
     //       });
-    
+
     //     // Khởi tạo WebSocket để nhận các thông báo mới
     //     const newSocket = new WebSocket('ws://localhost:8080');
     //     setSocket(newSocket);
-    
+
     //     return () => {
     //       newSocket.close();
     //     };
     //   }, []);
-    
+
     //   useEffect(() => {
     //     if (!socket) {
     //       return;
     //     }
-    
+
     //     socket.onmessage = (message) => {
     //       const notification = JSON.parse(message.data);
     //       dispatch(addNotification(notification));
     //     };
     //   }, [socket, dispatch]);
-    
+
 
     return (
+
         <div className={cx('wrapper-notification')}>
             <h5 className={cx('title-name')}>Thông báo</h5>
             <div className={cx('line-page')}></div>
@@ -92,23 +103,23 @@ function Notification(props) {
                                         <div className={cx('item-icon')}>
                                             <Image className={cx('icon-img')} src={`../../../images/notification.png`} />
                                         </div>
-                                        <Link to={`/history/${username}`} onClick={()=>{window.scrollTo(0,0)}}>
-                                        <div className={cx('desc')}>
-                                            <span className={cx('title')}>Thông báo đặt xe thành công</span>
-                                            
-                                            <span className={cx('content')}>bạn đã đặt thành công xe
-                                                <b>
-                                                    <u>{notification.hireVehicle.vehicle.vehicleName}</u>
-                                                </b>
-                                                với tổng số tiền là   <b>
-                                                    <u>{notification.hireVehicle.totalMoney.toLocaleString('vi-VN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}đ</u>
-                                                </b>
-                                            </span>
-                                            <span className={cx('time')}>{notification.createDate}</span>
-                                            
-                                        </div>
+                                        <Link to={`/history/${username}`} onClick={() => { window.scrollTo(0, 0) }}>
+                                            <div className={cx('desc')}>
+                                                <span className={cx('title')}>Thông báo đặt xe thành công</span>
+
+                                                <span className={cx('content')}>bạn đã đặt thành công xe
+                                                    <b>
+                                                        <u>{notification.hireVehicle.vehicle.vehicleName}</u>
+                                                    </b>
+                                                    với tổng số tiền là   <b>
+                                                        <u>{notification.hireVehicle.totalMoney.toLocaleString('vi-VN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}đ</u>
+                                                    </b>
+                                                </span>
+                                                <span className={cx('time')}>{notification.createDate}</span>
+
+                                            </div>
                                         </Link>
-                                        
+
                                     </div>
                                 )
                                 : (
@@ -134,6 +145,8 @@ function Notification(props) {
 
 
         </div>
+
+
     );
 }
 

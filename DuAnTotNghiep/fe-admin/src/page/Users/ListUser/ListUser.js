@@ -24,12 +24,6 @@ function ListUser() {
     return (
         <div>
             <div className={cx('listUser')}>
-                <div className={cx('Widget_title')}>
-
-                    <h3>List Customer</h3>
-                    {/* <input type="search" placeholder="Search..." className={cx('Widget_search')}></input> */}
-
-                </div>
                 <div className={cx('listdata')}>
                     {customer.map(item => (
                         // <li className={cx('user')} key={item.cusUsername}><span>{item.cusUsername}</span> <span>FullName: {item.fullname}</span></li>

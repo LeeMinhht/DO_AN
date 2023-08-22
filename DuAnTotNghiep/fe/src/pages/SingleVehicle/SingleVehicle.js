@@ -53,7 +53,9 @@ function SingleVehicle() {
     }, []);
 
     //tìm kiếm customer
-    const username = 'leminh';
+    const storedUserData = localStorage.getItem('user');
+    const parsedUserData = JSON.parse(storedUserData);
+    const username = parsedUserData.cusUsername;
     useEffect(() => {
         axiosClient.get(`http://localhost:8080/customers/findById/${username}`)
             .then((response) => {

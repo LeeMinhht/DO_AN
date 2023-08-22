@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import classnames from "classnames/bind";
+import styles from './ChartBox.module.scss'
+
+const cx = classnames.bind(styles)
 
 function ChartBoxVehicle() {
   const [vehicleCount, setVehicleCount] = useState(0);
   const [hireCount, setHireCount] = useState(0);
 
   useEffect(() => {
-    // Gọi API "countVehicle" từ Java Controller để lấy tổng số lượng xe
     axios
       .get('http://localhost:8080/vehicle/countVehicle')
       .then(response => {
@@ -17,7 +20,6 @@ function ChartBoxVehicle() {
         console.error('Error fetching vehicle count:', error);
       });
 
-    // Gọi API "countHire" từ Java Controller để lấy số xe đang được thuê
     axios
       .get('http://localhost:8080/hireVehicle/countHire')
       .then(response => {
@@ -28,28 +30,31 @@ function ChartBoxVehicle() {
       });
   }, []);
 
+  // Tính phần trăm số xe đang thuê và số xe còn lại
+  const hiredPercentage = (hireCount / vehicleCount) * 100;
+  const availablePercentage = 100 - hiredPercentage;
+
   const chartData = [
-    { name: 'Tổng số xe', value: vehicleCount },
-    { name: 'Số xe đang thuê', value: hireCount }
+    { name: 'Đang thuê', value: hiredPercentage },
+    { name: 'Còn lại', value: availablePercentage }
   ];
 
-  const COLORS = ['#8884d8', '#82ca9d'];
+  const COLORS = ['#82ca9d', '#8884d8'];
 
   return (
-    <div className="chartBox">
-      <div className="boxInfor">
-        <div className="title">
+    <div className={cx("chartBox")}>
+      <div className={cx("boxInfor")}>
+        <div className={cx("title")}>
           Tổng số xe: {vehicleCount}
         </div>
-        <div className="customerCount">
-          Tổng số khách hàng: {hireCount}
+        <div className={cx("title")}>
+          Số Xe đã được thuê: {hireCount}
         </div>
-        <div className="view">Chi tiết</div>
       </div>
 
-      <div className="chartInfo">
-        <div className="chart">
-          <ResponsiveContainer width="100%" height={300}>
+      <div >
+        <div className={cx("chart")}>
+          <ResponsiveContainer width="100%" height={200}>
             <PieChart width={400} height={400}>
               <Pie
                 data={chartData}
@@ -57,9 +62,10 @@ function ChartBoxVehicle() {
                 nameKey="name"
                 cx="50%"
                 cy="50%"
-                // innerRadius={60}
                 outerRadius={80}
                 fill="#8884d8"
+                stroke="none"
+                labelLine={false}
                 label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
                   const RADIAN = Math.PI / 180;
                   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -80,7 +86,7 @@ function ChartBoxVehicle() {
                 }}
               >
                 {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={COLORS[index]} />
                 ))}
               </Pie>
               <Tooltip />
@@ -89,8 +95,7 @@ function ChartBoxVehicle() {
         </div>
         <div className="text" />
       </div>
-
-    </div >
+    </div>
   );
 }
 

@@ -24,7 +24,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("api/v1/public")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:3001","http://localhost:3002"})
 public class AuthController {
     @Autowired
     JwtProvider jwtProvider;

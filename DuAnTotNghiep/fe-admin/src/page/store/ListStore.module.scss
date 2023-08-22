@@ -10,6 +10,9 @@
     display: block;
     height: 100%;
     font-family: Roboto, Helvetica, Arial, sans-serif;
+    .th{
+        background-color: burlywood;
+    }
 }
 .title{
     position: relative;
@@ -63,6 +66,7 @@
     min-width: 750px;
     text-indent: initial;
     font-size: 18px;
+  
 }
 .tbody{
     text-align: center;

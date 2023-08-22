@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import poly.edu.dto.HireDto;
 import poly.edu.dto.RevenueDto;
+import poly.edu.dto.TopRentedVehicleDTO;
 import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.HireVehicle;
 import poly.edu.responsitory.HireVehicleReps;
@@ -23,6 +24,12 @@ import java.util.function.Function;
 public class HireVehicleImpl implements HireVehicleService {
     @Autowired
     private HireVehicleReps hireVehicleReps;
+
+    @Override
+    @Query(value = "SELECT new poly.edu.dto.TopRentedVehicleDTO(hv.vehicle.vehicleId,hv.vehicle.vehicleName, COUNT(*)) FROM HireVehicle hv GROUP BY hv.vehicle.vehicleId,hv.vehicle.vehicleName ORDER BY COUNT(*) DESC")
+    public List<TopRentedVehicleDTO> findTopRentedVehicles() {
+        return hireVehicleReps.findTopRentedVehicles();
+    }
 
     @Override
     @Query("SELECT o FROM HireVehicle o WHERE o.statusAccept = ?1 and o.vehicle.store.storeId = ?2")

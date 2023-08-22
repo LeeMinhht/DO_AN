@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import poly.edu.dto.HireDto;
 import poly.edu.dto.RevenueDto;
+import poly.edu.dto.TopRentedVehicleDTO;
 import poly.edu.dto.VehicleRevenue;
 import poly.edu.model.HireVehicle;
 import poly.edu.model.Vehicle;
@@ -26,6 +27,16 @@ public class HireRestController {
         return hireVehicleService.save(hireVehicle);
     }
 
+    @GetMapping("/top-rented-vehicles")
+    public ResponseEntity<List<TopRentedVehicleDTO>> getTopRentedVehicles() {
+        List<TopRentedVehicleDTO> topVehicles = hireVehicleService.findTopRentedVehicles();
+
+        if (topVehicles.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(topVehicles);
+        }
+    }
 
     @GetMapping("/findById/{hireId}")
     public Optional<HireVehicle> findById(@PathVariable("hireId") Integer hireId){
@@ -76,6 +87,11 @@ public class HireRestController {
     public HireVehicle updateById(@PathVariable("hireId")Integer hireId,@RequestBody HireVehicle hireVehicle){
         return hireVehicleService.save(hireVehicle);
 
+    }
+
+    @GetMapping("/getAll")
+    public List<HireVehicle> getAll(){
+        return hireVehicleService.findAll();
     }
 
 }

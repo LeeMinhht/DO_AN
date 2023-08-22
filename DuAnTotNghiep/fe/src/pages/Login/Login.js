@@ -27,22 +27,7 @@ const LoginComponent = () => {
         console.log('không tìm thấy Vehicle')
       });
   }
-  // const handleLogin = async () => {
-  //   try {
-
-
-  //     if (response.status === 200) {
-  //       // Lưu dữ liệu người dùng vào localStorage
-  //       localStorage.setItem('user', JSON.stringify(response.data.user));
-  //       console.log('Đăng nhập thành công');
-  //       window.location.href = `~/pages/Home`;
-  //     } else {
-  //       console.log('Đăng nhập thất bại');
-  //     }
-  //   } catch (error) {
-  //     console.error('Lỗi khi gọi API đăng nhập:', error);
-  //   }
-  // };
+ 
 
   return (
     <div>

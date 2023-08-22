@@ -14,20 +14,28 @@
 
         caption-side: bottom;
         border-collapse: collapse;
-
+        .userth{
+            padding: .8rem 0 1rem 0;
+        }
         .userthead {
             vertical-align: bottom;
             display: table-header-group;
             text-align: center;
+            background-color: burlywood;
+            color: #fff;
+           
         }
-
+        
         .usertr {
             border-bottom: 0.001rem solid rgba(0, 0, 0, 0.139);
             display: table-row;
-            font-size: 18px;
+            font-size: 16px;
+            margin-bottom: 3rem;
+           
         }
 
         .usertd {
+            font-weight: 300;
             padding: 0.5rem;
             display: table-cell;
             padding-right: 1rem;
@@ -40,3 +48,5 @@
     }
 
 }
+
+

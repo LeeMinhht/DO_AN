@@ -31,24 +31,23 @@ function ListStore() {
 
 
         <div className={cx('listStore')}>
-            <div className={cx('title')}>List Store</div>
             <div className={cx('box-table')}>
                 <table className={cx('table')}>
                     <thead className={cx('thead')}>
                         <tr className={cx('tr')}>
-                            <th>StoreId</th>
-                            <th>Name Store</th>
-                            <th>Name Customer</th>
-                            <th>Address</th>
-                            <th>Date Create</th>
-                            <th>Identity Card</th>
+                            {/* <th className={cx('th')}>StoreId</th> */}
+                            <th className={cx('th')}>Tên cửa hàng</th>
+                            <th className={cx('th')}>Tên Khách Hàng</th>
+                            <th className={cx('th')}>Địa chỉ</th>
+                            <th className={cx('th')}>Ngày tạo</th>
+                            <th className={cx('th')}>Doanh thu</th>
                             {/* <th>Action</th> */}
                         </tr>
                     </thead>
                     <tbody className={cx('tbody')}>
                         {listStore.map(item => (
                             <tr>
-                                <th>{item.storeId}</th>
+                                {/* <th>{item.storeId}</th> */}
 
                                 <th>{item.nameStore}</th>
                                 <td> {item.customer.fullname}</td>
