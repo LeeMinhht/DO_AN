@@ -22,7 +22,7 @@ const Login = () => {
       return;
     }
 
-    axios.post(`http://localhost:8080/api/v1/public/user-login`, customer)
+    axios.post(`http://localhost:8080/api/v1/public/admin-login`, customer)
       .then((response) => {
         // Xử lý đăng nhập thành công
         localStorage.setItem('user', JSON.stringify(response.data.user));
